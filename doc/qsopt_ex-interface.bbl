@@ -1,0 +1,18 @@
+\begin{thebibliography}{ACDE09}
+
+\bibitem[ACDE09]{qs}
+David Applegate, William Cook, Sanjeeb Dash, and Daniel Espinoza.
+\newblock {QSopt-ex} {2.6} --- {A} computer algebra system for polynomial
+  computations, 2009.
+
+\bibitem[GtGdt15]{Granlund12}
+Torb\"orn Granlund and the GMP~development team.
+\newblock {GNU MP}: {T}he {GNU} {M}ultiple {P}recision {A}rithmetic {L}ibrary
+  {6.0.0}, 2015.
+
+\bibitem[Ste15]{qsjon}
+Jon~Lund Steffensen.
+\newblock {QSopt-ex} {2.5.10 patch 3} - a fork adding improvements to the build
+  system, library and a python interface, 2015.
+
+\end{thebibliography}

@@ -1,0 +1,14 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  [33X[0;0Y[23X\texttt{qsopt}\_\texttt{ex-interface}[123X  is  a  GAP  package  that provides an
+  interface  to  [23XQSopt[123X  exact  rational  linear  program  solver  [ACDE09]  by
+  Applegate,Cook,Dash  and  Espinoza.  This  is  a minimalist package exposing
+  parts  of  qsopt  to  GAP. The particular version of QSopt-exact solver this
+  package  currently  follows  is  2.5.10-patch  3  of  a fork of the original
+  software  maintained  by  Jon Lund Steffenson [Ste15], which removes certain
+  dependencies     and     makes     the    software    easier    to    build.
+  [23X\texttt{qsopt}\_\texttt{ex-interface}[123X  provides a C wrapper qsinterface.c to
+  the  solver.  It  is  currently available for Unix/Linux systems running GAP
+  [23X4.5+[123X.[133X
+  

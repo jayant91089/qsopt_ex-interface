@@ -11,8 +11,8 @@
 ##
 
 InstallGlobalFunction(qsoptformatstr,
-function(obj,A,b,linrows)
-local At,cmatval,cmatcnt,cmatind,sense,i,j,c,r,ccnt,x,ostr,hasrat;
+function(obj,A,b,linrows,optargs)
+local At,cmatval,cmatcnt,cmatind,sense,i,j,c,r,ccnt,x,ostr,hasrat,qs_algo;
 # find out if A or b have rationals
 hasrat:=false;
 for i in [1..Size(obj)] do
@@ -61,7 +61,7 @@ for i in [1..Size(A)] do
   fi;
 od;
 if hasrat=false then
- Display("norat");
+ #Display("norat");
  ostr:=[];
  Append(ostr,[String(1)]);
  Append(ostr,[String(Size(A))]);
@@ -130,12 +130,25 @@ else
    Append(ostr,[String(DenominatorRat(x))]);
   od;
 fi;
+if not Size(optargs) > 0 then
+  qs_algo:=0; # primal simplex
+else
+  qs_algo:=optargs[1];
+fi;
+Append(ostr,[String(qs_algo)]);
 return ostr;
 end);
 
-InstallGlobalFunction(QSLP,
-function(obj,A,b,linrows,qs_exec)
-local str;
-  str:=qsoptformatstr(obj,A,b,linrows);
-  Process( DirectoryCurrent(),qs_exec, InputTextNone(), out,str);
+InstallGlobalFunction(SolveLPQS,
+function(obj,A,b,linrows,qs_exec,optargs)
+local cmdopt,ostr,stdout,i,ret,val_rval,val,x_rval,x,rlist;
+  cmdopt:=qsoptformatstr(obj,A,b,linrows,optargs);
+  ostr := "";;
+  stdout := OutputTextString( ostr, true );;
+  Process( DirectoryCurrent(), qs_exec, InputTextNone(), stdout, cmdopt );;
+  #Display(ostr);
+  ostr:=Concatenation("local ret,val_rval,val,x,x_rval,rlist;",ostr,"return [ret,val_rval,val,x_rval,x];");
+  i := InputTextString( ostr);;
+  rlist:=ReadAsFunction(i)();
+  return rlist;
 end);

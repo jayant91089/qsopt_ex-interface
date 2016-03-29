@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This is an automatically generated file. -->
+<Chapter Label="Chapter_Introduction">
+<Heading>Introduction</Heading>
+
+<Math>\texttt{qsopt}\_\texttt{ex-interface}</Math> is a GAP package that provides an interface to <Math>QSopt</Math> exact rational
+linear program solver <Cite Key="qs"/> by Applegate,Cook,Dash and Espinoza. This is a minimalist package exposing parts of qsopt to GAP. The particular version of QSopt-exact
+solver this package currently follows is 2.5.10-patch 3 of a fork of the original software maintained by Jon Lund Steffenson <Cite Key="qsjon"/>, which removes certain dependencies and
+makes the software easier to build. <Math>\texttt{qsopt}\_\texttt{ex-interface}</Math> provides a C wrapper qsinterface.c to the solver. It is currently available for Unix/Linux systems running GAP <Math>4.5+</Math>.
+</Chapter>
+

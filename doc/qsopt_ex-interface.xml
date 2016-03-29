@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This is an automatically generated file. -->
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+[
+<!ENTITY see '<Alt Only="LaTeX">$	o$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
+<!ENTITY qsopt_ex-interface '<Package>qsopt_ex-interface</Package>'>
+]
+>
+<Book Name="qsopt_ex-interface">
+<#Include SYSTEM "title.xml">
+<TableOfContents/>
+<Body>
+<Index>&qsopt_ex-interface;</Index>
+<#Include SYSTEM "AutoDocMainFile.xml">
+</Body>
+<Bibliography Databases="qsopt_ex-interface.bib"/>
+<TheIndex/>
+</Book>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This is an automatically generated file. -->
+<Chapter Label="Chapter_Usage">
+<Heading>Usage</Heading>
+
+<Section Label="Chapter_Usage_Section_Available_functions">
+<Heading>Available functions</Heading>
+
+In this section we shall look at the functions provided by qsopt_ex-interface.
+<ManSection>
+  <Func Arg="obj,A,b,linrows,qs_exec,optargs" Name="SolveLPQS" />
+ <Returns>A list
+</Returns>
+ <Description>
+This function solves an LP by involking external qsopt-exact LP solver process.
+It accepts following arguments:
+<List>
+<Item>
+<Math>obj</Math> - Objective function coefficients, provided as a list
+</Item>
+<Item>
+<Math>A</Math> - A list of lists corresponding to constraints
+</Item>
+<Item>
+<Math>b</Math> - Right hand side of constraints
+</Item>
+<Item>
+<Math>linrows</Math> - A list of indices of members of <Math>A</Math> that are equalities
+</Item>
+<Item>
+<Math>qs\_exec</Math> - A string describing complete path to 'qsi' executable
+</Item>
+</List>
+*
+Returns a list <Math>[rval,val\_rval,val,x\_rval,x]</Math>
+ </Description>
+</ManSection>
+
+
+</Section>
+
+
+</Chapter>
+

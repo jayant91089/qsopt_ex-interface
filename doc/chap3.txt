@@ -1,0 +1,29 @@
+  
+  [1X3 [33X[0;0YUsage[133X[101X
+  
+  
+  [1X3.1 [33X[0;0YAvailable functions[133X[101X
+  
+  [33X[0;0YIn   this   section   we   shall   look   at   the   functions  provided  by
+  qsopt_ex-interface.[133X
+  
+  [1X3.1-1 SolveLPQS[101X
+  
+  [29X[2XSolveLPQS[102X( [3Xobj[103X, [3XA[103X, [3Xb[103X, [3Xlinrows[103X, [3Xqs_exec[103X, [3Xoptargs[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10YA list[133X
+  
+  [33X[0;0YThis  function  solves  an  LP  by  involking external qsopt-exact LP solver
+  process. It accepts following arguments:[133X
+  
+  [30X    [33X[0;6Y[23Xobj[123X - Objective function coefficients, provided as a list[133X
+  
+  [30X    [33X[0;6Y[23XA[123X - A list of lists corresponding to constraints[133X
+  
+  [30X    [33X[0;6Y[23Xb[123X - Right hand side of constraints[133X
+  
+  [30X    [33X[0;6Y[23Xlinrows[123X - A list of indices of members of [23XA[123X that are equalities[133X
+  
+  [30X    [33X[0;6Y[23Xqs\_exec[123X - A string describing complete path to 'qsi' executable[133X
+  
+  [33X[0;0Y* Returns a list [23X[rval,val\_rval,val,x\_rval,x][123X[133X
+  
