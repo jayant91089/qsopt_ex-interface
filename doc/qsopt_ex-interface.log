@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.4.4)  28 MAR 2016 20:35
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.4.4)  4 APR 2016 19:29
 entering extended mode
  %&-line parsing enabled.
 **qsopt_ex-interface
@@ -779,14 +779,14 @@ tall script
 ]
 Chapter 3.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 190.
-(./qsopt_ex-interface.bbl (./qsopt_ex-interface.brf)
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 195.
+[5
+
+] [6] (./qsopt_ex-interface.bbl (./qsopt_ex-interface.brf)
 \tf@brf=\write8
 \openout8 = `qsopt_ex-interface.brf'.
 
- [5
-
-]) [6
+ [7]) [8
 
 ]
 (./qsopt_ex-interface.ind
@@ -794,32 +794,33 @@ LaTeX Font Info:    Try loading font information for T1+phv on input line 3.
  (/usr/share/texmf-texlive/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
-[7
+[9
 
 
 
 ]) (./qsopt_ex-interface.aux) ) 
 Here is how much of TeX's memory you used:
- 6145 strings out of 495061
- 87213 string characters out of 1182622
- 146620 words of memory out of 3000000
- 9147 multiletter control sequences out of 15000+50000
- 57489 words of font info for 76 fonts, out of 3000000 for 9000
+ 6168 strings out of 495061
+ 87524 string characters out of 1182622
+ 149924 words of memory out of 3000000
+ 9154 multiletter control sequences out of 15000+50000
+ 62372 words of font info for 81 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 38i,5n,36p,668b,327s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,6n,36p,668b,357s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8
 r.enc} </home/aspitrg3-users/jayant/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecst
 1095.600pk> </home/aspitrg3-users/jayant/.texmf-var/fonts/pk/ljfour/jknappen/ec
 /ectt1095.600pk> </home/aspitrg3-users/jayant/.texmf-var/fonts/pk/ljfour/jknapp
 en/ec/ectt1000.600pk></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
 mmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></
-usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-t
-exlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/u
-rw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb
->
-Output written on qsopt_ex-interface.pdf (7 pages, 116806 bytes).
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
+exmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-texlive/font
+s/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/ut
+mr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share
+/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on qsopt_ex-interface.pdf (9 pages, 143552 bytes).
 PDF statistics:
- 244 PDF objects out of 1000 (max. 8388607)
- 26 named destinations out of 1000 (max. 500000)
+ 282 PDF objects out of 1000 (max. 8388607)
+ 38 named destinations out of 1000 (max. 500000)
  49 words of extra memory for PDF output out of 10000 (max. 10000000)
 

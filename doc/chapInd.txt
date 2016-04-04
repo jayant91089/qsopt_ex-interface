@@ -2,8 +2,13 @@
   
   [1XIndex[101X
   
+  [2XFlushQSLP[102X  3.1-4
+  [2XGetQSLPsol_dual[102X  3.1-6
+  [2XGetQSLPsol_primal[102X  3.1-5
+  [2XLoadQSLP[102X  3.1-1
+  [2XLoadQSLPobj[102X  3.1-2
   [5Xqsopt_ex-interface[105X  .-1
-  [2XSolveLPQS[102X  3.1-1
+  [2XSolveQSLP[102X  3.1-3
   
   
   -------------------------------------------------------

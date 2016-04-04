@@ -42,19 +42,71 @@ GAPInfo.("RootPaths");
 #! from within GAP.
 #! @Chapter Usage
 #! @Section Available functions
-#!  In this section we shall look at the functions provided by qsopt_ex-interface.
+#!  In this section we shall look at the functions provided by qsopt_ex-interface. $\texttt{qsopt}\_\texttt{ex-interface}$ allows
+#! GAP to communicate with external LP solver process via a stream object of category IsInputOutputStream(). This steam serves as a
+#! handle via which one can load/solve/modify linear programs. Note that it is possible to maintain several such steams (and hence LPs)
+#! at any given time. However, the gap commands to solve/modify these LPs that currently available in this package are blocking functions.
 #! @Description
-#! This function solves an LP by involking external qsopt-exact LP solver process.
+#! This function loads an LP by invoking external qsopt-exact LP solver process.
 #! It accepts following arguments:
 #! * $obj$ - Objective function coefficients, provided as a list
 #! * $A$ - A list of lists corresponding to constraints
 #! * $b$ - Right hand side of constraints
 #! * $linrows$ - A list of indices of members of $A$ that are equalities
-#! * $qs\_exec$ - A string describing complete path to 'qsi' executable
-#! *
-#! Returns a list $[rval,val\_rval,val,x\_rval,x]$
+#! * $qs\_exec$ - A string describing complete path to 'qsi' executable (including 'qsi')
+#! Returns a list $[s,rval]$ where 's' is a gap object of category IsInputOutputStream() and 'rval'
+#! $=1/-1$ indicates success/failure. If 'rval=1', 's' is ready to be be used to solve linear programs.
 #! @Returns A list
 #! @Arguments obj,A,b,linrows,qs_exec,optargs
-DeclareGlobalFunction("SolveLPQS");
+DeclareGlobalFunction("LoadQSLP");
+#! @Description
+#! This function loads a new objective.
+#! It accepts following arguments:
+#! * $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP
+#! * $obj$ - Objective function coefficients, provided as a list
+#! Returns an integer 'rval' $=1/-1$ that indicate success/failure. If 'rval=1',
+#! the LP associated with 's' is successfully modified.
+#! @Returns An integer
+#! @Arguments s,obj
+DeclareGlobalFunction("LoadQSLPobj");
+#! @Description
+#! This function loads an LP by invoking external qsopt-exact LP solver process.
+#! It accepts following arguments:
+#! * $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP
+#! * $optargs$ - A list of optional arguments. Currently supports only one optional argument, which is an integer
+#!   specifying simplex variant to use: $optargs=[1]$ for primal simplex, $optargs=[2]$ for dual simplex and $optargs=[3]$ for either
+#! Returns an integer $status$ that is the integer returned by $\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()$ function.
+#! @Returns An integer
+#! @Arguments s
+DeclareGlobalFunction("SolveQSLP");
+#! @Description
+#! This function terminates the external processes associated with given LP handle.
+#! It accepts following arguments:
+#! * $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP
+#! Returns Nothing
+#! @Returns
+#! @Arguments s
+DeclareGlobalFunction("FlushQSLP");
+#! @Description
+#! This function obtains the primal solution along with the associated vertex vertex, for the most recently solved LP.
+#! It accepts following arguments:
+#! * $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP
+#! Returns A list $[status,val\_rval,val,x\_rval,x]$ if optimal solution exists and a list $[status]$ otherwise. If $status=1$,
+#! $val\_rval$ and $x\_rval$ indicate validity of $val$ and $x$ (valid if $1$ and invalid if $-1$) which are optimal solution
+#! and (primal) vertex achieving optimal solution respectively. Other status values correspond to the integer returned by $\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()$ function.
+#! @Returns A list
+#! @Arguments s
+DeclareGlobalFunction("GetQSLPsol_primal");
+#! @Description
+#! This function obtains the primal solution along with the associated vertex vertex, for the most recently solved LP.
+#! It accepts following arguments:
+#! * $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP
+#! Returns A list $[status,val\_rval,val,y\_rval,y]$ if optimal solution exists and a list $[status]$ otherwise. If $status=1$,
+#! $val\_rval$ and $x\_rval$ indicate validity of $val$ and $x$ (valid if $1$ and invalid if $-1$) which are optimal solution
+#! and (dual) vertex achieving optimal solution respectively. Other status values correspond to the integer returned by $\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()$ function.
+#! @Returns A list
+#! @Arguments s
+DeclareGlobalFunction("GetQSLPsol_dual");
 
 DeclareGlobalFunction("qsoptformatstr");
+DeclareGlobalFunction("qsoptformatstr2");

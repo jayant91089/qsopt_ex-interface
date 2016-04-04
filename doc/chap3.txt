@@ -5,14 +5,20 @@
   [1X3.1 [33X[0;0YAvailable functions[133X[101X
   
   [33X[0;0YIn   this   section   we   shall   look   at   the   functions  provided  by
-  qsopt_ex-interface.[133X
+  qsopt_ex-interface.   [23X\texttt{qsopt}\_\texttt{ex-interface}[123X  allows  GAP  to
+  communicate  with external LP solver process via a stream object of category
+  IsInputOutputStream().  This  steam  serves  as  a  handle via which one can
+  load/solve/modify  linear  programs.  Note  that  it is possible to maintain
+  several  such  steams  (and  hence  LPs) at any given time. However, the gap
+  commands  to solve/modify these LPs that currently available in this package
+  are blocking functions.[133X
   
-  [1X3.1-1 SolveLPQS[101X
+  [1X3.1-1 LoadQSLP[101X
   
-  [29X[2XSolveLPQS[102X( [3Xobj[103X, [3XA[103X, [3Xb[103X, [3Xlinrows[103X, [3Xqs_exec[103X, [3Xoptargs[103X ) [32X function
+  [29X[2XLoadQSLP[102X( [3Xobj[103X, [3XA[103X, [3Xb[103X, [3Xlinrows[103X, [3Xqs_exec[103X, [3Xoptargs[103X ) [32X function
   [6XReturns:[106X  [33X[0;10YA list[133X
   
-  [33X[0;0YThis  function  solves  an  LP  by  involking external qsopt-exact LP solver
+  [33X[0;0YThis  function  loads  an  LP  by  invoking  external  qsopt-exact LP solver
   process. It accepts following arguments:[133X
   
   [30X    [33X[0;6Y[23Xobj[123X - Objective function coefficients, provided as a list[133X
@@ -23,7 +29,92 @@
   
   [30X    [33X[0;6Y[23Xlinrows[123X - A list of indices of members of [23XA[123X that are equalities[133X
   
-  [30X    [33X[0;6Y[23Xqs\_exec[123X - A string describing complete path to 'qsi' executable[133X
+  [30X    [33X[0;6Y[23Xqs\_exec[123X  -  A  string  describing  complete  path to 'qsi' executable
+        (including 'qsi')[133X
   
-  [33X[0;0Y* Returns a list [23X[rval,val\_rval,val,x\_rval,x][123X[133X
+  [33X[0;0YReturns   a   list   [23X[s,rval][123X   where  's'  is  a  gap  object  of  category
+  IsInputOutputStream()   and   'rval'  [23X=1/-1[123X  indicates  success/failure.  If
+  'rval=1', 's' is ready to be be used to solve linear programs.[133X
+  
+  [1X3.1-2 LoadQSLPobj[101X
+  
+  [29X[2XLoadQSLPobj[102X( [3Xs[103X, [3Xobj[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10YAn integer[133X
+  
+  [33X[0;0YThis function loads a new objective. It accepts following arguments:[133X
+  
+  [30X    [33X[0;6Y[23Xs[123X - gap object of category IsInputOutputStream(), handle to an already
+        loaded LP[133X
+  
+  [30X    [33X[0;6Y[23Xobj[123X - Objective function coefficients, provided as a list[133X
+  
+  [33X[0;0YReturns  an integer 'rval' [23X=1/-1[123X that indicate success/failure. If 'rval=1',
+  the LP associated with 's' is successfully modified.[133X
+  
+  [1X3.1-3 SolveQSLP[101X
+  
+  [29X[2XSolveQSLP[102X( [3Xs[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10YAn integer[133X
+  
+  [33X[0;0YThis  function  loads  an  LP  by  invoking  external  qsopt-exact LP solver
+  process. It accepts following arguments:[133X
+  
+  [30X    [33X[0;6Y[23Xs[123X - gap object of category IsInputOutputStream(), handle to an already
+        loaded LP[133X
+  
+  [30X    [33X[0;6Y[23Xoptargs[123X  -  A  list of optional arguments. Currently supports only one
+        optional  argument,  which is an integer specifying simplex variant to
+        use:  [23Xoptargs=[1][123X for primal simplex, [23Xoptargs=[2][123X for dual simplex and
+        [23Xoptargs=[3][123X for either[133X
+  
+  [33X[0;0YReturns    an   integer   [23Xstatus[123X   that   is   the   integer   returned   by
+  [23X\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()[123X function.[133X
+  
+  [1X3.1-4 FlushQSLP[101X
+  
+  [29X[2XFlushQSLP[102X( [3Xs[103X ) [32X function
+  
+  [33X[0;0YThis  function  terminates  the  external processes associated with given LP
+  handle. It accepts following arguments:[133X
+  
+  [30X    [33X[0;6Y[23Xs[123X - gap object of category IsInputOutputStream(), handle to an already
+        loaded LP[133X
+  
+  [33X[0;0YReturns Nothing[133X
+  
+  [1X3.1-5 GetQSLPsol_primal[101X
+  
+  [29X[2XGetQSLPsol_primal[102X( [3Xs[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10YA list[133X
+  
+  [33X[0;0YThis  function  obtains the primal solution along with the associated vertex
+  vertex, for the most recently solved LP. It accepts following arguments:[133X
+  
+  [30X    [33X[0;6Y[23Xs[123X - gap object of category IsInputOutputStream(), handle to an already
+        loaded LP[133X
+  
+  [33X[0;0YReturns  A  list [23X[status,val\_rval,val,x\_rval,x][123X if optimal solution exists
+  and  a  list [23X[status][123X otherwise. If [23Xstatus=1[123X, [23Xval\_rval[123X and [23Xx\_rval[123X indicate
+  validity  of  [23Xval[123X  and  [23Xx[123X  (valid  if [23X1[123X and invalid if [23X-1[123X) which are optimal
+  solution  and (primal) vertex achieving optimal solution respectively. Other
+  status     values     correspond     to     the    integer    returned    by
+  [23X\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()[123X function.[133X
+  
+  [1X3.1-6 GetQSLPsol_dual[101X
+  
+  [29X[2XGetQSLPsol_dual[102X( [3Xs[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10YA list[133X
+  
+  [33X[0;0YThis  function  obtains the primal solution along with the associated vertex
+  vertex, for the most recently solved LP. It accepts following arguments:[133X
+  
+  [30X    [33X[0;6Y[23Xs[123X - gap object of category IsInputOutputStream(), handle to an already
+        loaded LP[133X
+  
+  [33X[0;0YReturns  A  list [23X[status,val\_rval,val,y\_rval,y][123X if optimal solution exists
+  and  a  list [23X[status][123X otherwise. If [23Xstatus=1[123X, [23Xval\_rval[123X and [23Xx\_rval[123X indicate
+  validity  of  [23Xval[123X  and  [23Xx[123X  (valid  if [23X1[123X and invalid if [23X-1[123X) which are optimal
+  solution  and  (dual)  vertex achieving optimal solution respectively. Other
+  status     values     correspond     to     the    integer    returned    by
+  [23X\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()[123X function.[133X
   

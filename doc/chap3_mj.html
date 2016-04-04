@@ -28,7 +28,12 @@
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X835D65A88292737E">3.1 <span class="Heading">Available functions</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X810738CF785A8AA9">3.1-1 SolveLPQS</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F3A2171848094DB">3.1-1 LoadQSLP</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7914011C7AB692CF">3.1-2 LoadQSLPobj</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D6238047D53BB97">3.1-3 SolveQSLP</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E4E00C884F72A22">3.1-4 FlushQSLP</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79D8E9C482C75CC8">3.1-5 GetQSLPsol_primal</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X83D6C81084CFA840">3.1-6 GetQSLPsol_dual</a></span>
 </div></div>
 </div>
 
@@ -38,16 +43,16 @@
 
 <h4>3.1 <span class="Heading">Available functions</span></h4>
 
-<p>In this section we shall look at the functions provided by qsopt_ex-interface.</p>
+<p>In this section we shall look at the functions provided by qsopt_ex-interface. <span class="SimpleMath">\(\texttt{qsopt}\_\texttt{ex-interface}\)</span> allows GAP to communicate with external LP solver process via a stream object of category IsInputOutputStream(). This steam serves as a handle via which one can load/solve/modify linear programs. Note that it is possible to maintain several such steams (and hence LPs) at any given time. However, the gap commands to solve/modify these LPs that currently available in this package are blocking functions.</p>
 
-<p><a id="X810738CF785A8AA9" name="X810738CF785A8AA9"></a></p>
+<p><a id="X7F3A2171848094DB" name="X7F3A2171848094DB"></a></p>
 
-<h5>3.1-1 SolveLPQS</h5>
+<h5>3.1-1 LoadQSLP</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SolveLPQS</code>( <var class="Arg">obj</var>, <var class="Arg">A</var>, <var class="Arg">b</var>, <var class="Arg">linrows</var>, <var class="Arg">qs_exec</var>, <var class="Arg">optargs</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LoadQSLP</code>( <var class="Arg">obj</var>, <var class="Arg">A</var>, <var class="Arg">b</var>, <var class="Arg">linrows</var>, <var class="Arg">qs_exec</var>, <var class="Arg">optargs</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Returns: A list</p>
 
-<p>This function solves an LP by involking external qsopt-exact LP solver process. It accepts following arguments:</p>
+<p>This function loads an LP by invoking external qsopt-exact LP solver process. It accepts following arguments:</p>
 
 
 <ul>
@@ -63,11 +68,100 @@
 <li><p><span class="SimpleMath">\(linrows\)</span> - A list of indices of members of <span class="SimpleMath">\(A\)</span> that are equalities</p>
 
 </li>
-<li><p><span class="SimpleMath">\(qs\_exec\)</span> - A string describing complete path to 'qsi' executable</p>
+<li><p><span class="SimpleMath">\(qs\_exec\)</span> - A string describing complete path to 'qsi' executable (including 'qsi')</p>
 
 </li>
 </ul>
-<p>* Returns a list <span class="SimpleMath">\([rval,val\_rval,val,x\_rval,x]\)</span></p>
+<p>Returns a list <span class="SimpleMath">\([s,rval]\)</span> where 's' is a gap object of category IsInputOutputStream() and 'rval' <span class="SimpleMath">\(=1/-1\)</span> indicates success/failure. If 'rval=1', 's' is ready to be be used to solve linear programs.</p>
+
+<p><a id="X7914011C7AB692CF" name="X7914011C7AB692CF"></a></p>
+
+<h5>3.1-2 LoadQSLPobj</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LoadQSLPobj</code>( <var class="Arg">s</var>, <var class="Arg">obj</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: An integer</p>
+
+<p>This function loads a new objective. It accepts following arguments:</p>
+
+
+<ul>
+<li><p><span class="SimpleMath">\(s\)</span> - gap object of category IsInputOutputStream(), handle to an already loaded LP</p>
+
+</li>
+<li><p><span class="SimpleMath">\(obj\)</span> - Objective function coefficients, provided as a list</p>
+
+</li>
+</ul>
+<p>Returns an integer 'rval' <span class="SimpleMath">\(=1/-1\)</span> that indicate success/failure. If 'rval=1', the LP associated with 's' is successfully modified.</p>
+
+<p><a id="X7D6238047D53BB97" name="X7D6238047D53BB97"></a></p>
+
+<h5>3.1-3 SolveQSLP</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SolveQSLP</code>( <var class="Arg">s</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: An integer</p>
+
+<p>This function loads an LP by invoking external qsopt-exact LP solver process. It accepts following arguments:</p>
+
+
+<ul>
+<li><p><span class="SimpleMath">\(s\)</span> - gap object of category IsInputOutputStream(), handle to an already loaded LP</p>
+
+</li>
+<li><p><span class="SimpleMath">\(optargs\)</span> - A list of optional arguments. Currently supports only one optional argument, which is an integer specifying simplex variant to use: <span class="SimpleMath">\(optargs=[1]\)</span> for primal simplex, <span class="SimpleMath">\(optargs=[2]\)</span> for dual simplex and <span class="SimpleMath">\(optargs=[3]\)</span> for either</p>
+
+</li>
+</ul>
+<p>Returns an integer <span class="SimpleMath">\(status\)</span> that is the integer returned by <span class="SimpleMath">\(\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()\)</span> function.</p>
+
+<p><a id="X7E4E00C884F72A22" name="X7E4E00C884F72A22"></a></p>
+
+<h5>3.1-4 FlushQSLP</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FlushQSLP</code>( <var class="Arg">s</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>This function terminates the external processes associated with given LP handle. It accepts following arguments:</p>
+
+
+<ul>
+<li><p><span class="SimpleMath">\(s\)</span> - gap object of category IsInputOutputStream(), handle to an already loaded LP</p>
+
+</li>
+</ul>
+<p>Returns Nothing</p>
+
+<p><a id="X79D8E9C482C75CC8" name="X79D8E9C482C75CC8"></a></p>
+
+<h5>3.1-5 GetQSLPsol_primal</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetQSLPsol_primal</code>( <var class="Arg">s</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: A list</p>
+
+<p>This function obtains the primal solution along with the associated vertex vertex, for the most recently solved LP. It accepts following arguments:</p>
+
+
+<ul>
+<li><p><span class="SimpleMath">\(s\)</span> - gap object of category IsInputOutputStream(), handle to an already loaded LP</p>
+
+</li>
+</ul>
+<p>Returns A list <span class="SimpleMath">\([status,val\_rval,val,x\_rval,x]\)</span> if optimal solution exists and a list <span class="SimpleMath">\([status]\)</span> otherwise. If <span class="SimpleMath">\(status=1\)</span>, <span class="SimpleMath">\(val\_rval\)</span> and <span class="SimpleMath">\(x\_rval\)</span> indicate validity of <span class="SimpleMath">\(val\)</span> and <span class="SimpleMath">\(x\)</span> (valid if <span class="SimpleMath">\(1\)</span> and invalid if <span class="SimpleMath">\(-1\)</span>) which are optimal solution and (primal) vertex achieving optimal solution respectively. Other status values correspond to the integer returned by <span class="SimpleMath">\(\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()\)</span> function.</p>
+
+<p><a id="X83D6C81084CFA840" name="X83D6C81084CFA840"></a></p>
+
+<h5>3.1-6 GetQSLPsol_dual</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetQSLPsol_dual</code>( <var class="Arg">s</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: A list</p>
+
+<p>This function obtains the primal solution along with the associated vertex vertex, for the most recently solved LP. It accepts following arguments:</p>
+
+
+<ul>
+<li><p><span class="SimpleMath">\(s\)</span> - gap object of category IsInputOutputStream(), handle to an already loaded LP</p>
+
+</li>
+</ul>
+<p>Returns A list <span class="SimpleMath">\([status,val\_rval,val,y\_rval,y]\)</span> if optimal solution exists and a list <span class="SimpleMath">\([status]\)</span> otherwise. If <span class="SimpleMath">\(status=1\)</span>, <span class="SimpleMath">\(val\_rval\)</span> and <span class="SimpleMath">\(x\_rval\)</span> indicate validity of <span class="SimpleMath">\(val\)</span> and <span class="SimpleMath">\(x\)</span> (valid if <span class="SimpleMath">\(1\)</span> and invalid if <span class="SimpleMath">\(-1\)</span>) which are optimal solution and (dual) vertex achieving optimal solution respectively. Other status values correspond to the integer returned by <span class="SimpleMath">\(\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()\)</span> function.</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>

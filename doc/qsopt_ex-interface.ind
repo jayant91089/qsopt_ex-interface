@@ -4,6 +4,20 @@
 
   \indexspace
 
-  \item \texttt  {SolveLPQS}, \hyperpage{5}
+  \item \texttt  {FlushQSLP}, \hyperpage{6}
+
+  \indexspace
+
+  \item \texttt  {GetQSLPsol{\textunderscore }dual}, \hyperpage{6}
+  \item \texttt  {GetQSLPsol{\textunderscore }primal}, \hyperpage{6}
+
+  \indexspace
+
+  \item \texttt  {LoadQSLP}, \hyperpage{5}
+  \item \texttt  {LoadQSLPobj}, \hyperpage{5}
+
+  \indexspace
+
+  \item \texttt  {SolveQSLP}, \hyperpage{6}
 
 \end{theindex}

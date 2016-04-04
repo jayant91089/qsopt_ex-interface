@@ -185,29 +185,140 @@ the locally installed libraries.
 \hyperdef{L}{X835D65A88292737E}{}
 {
   In this section we shall look at the functions provided by
-qsopt{\textunderscore}ex-interface. 
+qsopt{\textunderscore}ex-interface. $\texttt{qsopt}\_\texttt{ex-interface}$ allows GAP to communicate with external LP solver process via a stream object
+of category IsInputOutputStream(). This steam serves as a handle via which one
+can load/solve/modify linear programs. Note that it is possible to maintain
+several such steams (and hence LPs) at any given time. However, the gap
+commands to solve/modify these LPs that currently available in this package
+are blocking functions. 
 
-\subsection{\textcolor{Chapter }{SolveLPQS}}
+\subsection{\textcolor{Chapter }{LoadQSLP}}
 \logpage{[ 3, 1, 1 ]}\nobreak
-\hyperdef{L}{X810738CF785A8AA9}{}
-{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SolveLPQS({\mdseries\slshape obj, A, b, linrows, qs{\textunderscore}exec, optargs})\index{SolveLPQS@\texttt{SolveLPQS}}
-\label{SolveLPQS}
+\hyperdef{L}{X7F3A2171848094DB}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{LoadQSLP({\mdseries\slshape obj, A, b, linrows, qs{\textunderscore}exec, optargs})\index{LoadQSLP@\texttt{LoadQSLP}}
+\label{LoadQSLP}
 }\hfill{\scriptsize (function)}}\\
 \textbf{\indent Returns:\ }
 A list 
 
 
 
- This function solves an LP by involking external qsopt-exact LP solver
-process. It accepts following arguments: 
+ This function loads an LP by invoking external qsopt-exact LP solver process.
+It accepts following arguments: 
 \begin{itemize}
 \item  $obj$ - Objective function coefficients, provided as a list 
 \item  $A$ - A list of lists corresponding to constraints 
 \item  $b$ - Right hand side of constraints 
 \item  $linrows$ - A list of indices of members of $A$ that are equalities 
-\item  $qs\_exec$ - A string describing complete path to 'qsi' executable 
+\item  $qs\_exec$ - A string describing complete path to 'qsi' executable (including 'qsi') 
 \end{itemize}
- * Returns a list $[rval,val\_rval,val,x\_rval,x]$ }
+ Returns a list $[s,rval]$ where 's' is a gap object of category IsInputOutputStream() and 'rval' $=1/-1$ indicates success/failure. If 'rval=1', 's' is ready to be be used to solve
+linear programs. }
+
+ 
+
+\subsection{\textcolor{Chapter }{LoadQSLPobj}}
+\logpage{[ 3, 1, 2 ]}\nobreak
+\hyperdef{L}{X7914011C7AB692CF}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{LoadQSLPobj({\mdseries\slshape s, obj})\index{LoadQSLPobj@\texttt{LoadQSLPobj}}
+\label{LoadQSLPobj}
+}\hfill{\scriptsize (function)}}\\
+\textbf{\indent Returns:\ }
+An integer 
+
+
+
+ This function loads a new objective. It accepts following arguments: 
+\begin{itemize}
+\item  $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP 
+\item  $obj$ - Objective function coefficients, provided as a list 
+\end{itemize}
+ Returns an integer 'rval' $=1/-1$ that indicate success/failure. If 'rval=1', the LP associated with 's' is
+successfully modified. }
+
+ 
+
+\subsection{\textcolor{Chapter }{SolveQSLP}}
+\logpage{[ 3, 1, 3 ]}\nobreak
+\hyperdef{L}{X7D6238047D53BB97}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SolveQSLP({\mdseries\slshape s})\index{SolveQSLP@\texttt{SolveQSLP}}
+\label{SolveQSLP}
+}\hfill{\scriptsize (function)}}\\
+\textbf{\indent Returns:\ }
+An integer 
+
+
+
+ This function loads an LP by invoking external qsopt-exact LP solver process.
+It accepts following arguments: 
+\begin{itemize}
+\item  $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP 
+\item  $optargs$ - A list of optional arguments. Currently supports only one optional argument,
+which is an integer specifying simplex variant to use: $optargs=[1]$ for primal simplex, $optargs=[2]$ for dual simplex and $optargs=[3]$ for either 
+\end{itemize}
+ Returns an integer $status$ that is the integer returned by $\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()$ function. }
+
+ 
+
+\subsection{\textcolor{Chapter }{FlushQSLP}}
+\logpage{[ 3, 1, 4 ]}\nobreak
+\hyperdef{L}{X7E4E00C884F72A22}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{FlushQSLP({\mdseries\slshape s})\index{FlushQSLP@\texttt{FlushQSLP}}
+\label{FlushQSLP}
+}\hfill{\scriptsize (function)}}\\
+\textbf{\indent Returns:\ }
+
+
+
+
+ This function terminates the external processes associated with given LP
+handle. It accepts following arguments: 
+\begin{itemize}
+\item  $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP 
+\end{itemize}
+ Returns Nothing }
+
+ 
+
+\subsection{\textcolor{Chapter }{GetQSLPsol{\textunderscore}primal}}
+\logpage{[ 3, 1, 5 ]}\nobreak
+\hyperdef{L}{X79D8E9C482C75CC8}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{GetQSLPsol{\textunderscore}primal({\mdseries\slshape s})\index{GetQSLPsolprimal@\texttt{GetQSLPsol{\textunderscore}primal}}
+\label{GetQSLPsolprimal}
+}\hfill{\scriptsize (function)}}\\
+\textbf{\indent Returns:\ }
+A list 
+
+
+
+ This function obtains the primal solution along with the associated vertex
+vertex, for the most recently solved LP. It accepts following arguments: 
+\begin{itemize}
+\item  $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP 
+\end{itemize}
+ Returns A list $[status,val\_rval,val,x\_rval,x]$ if optimal solution exists and a list $[status]$ otherwise. If $status=1$, $val\_rval$ and $x\_rval$ indicate validity of $val$ and $x$ (valid if $1$ and invalid if $-1$) which are optimal solution and (primal) vertex achieving optimal solution
+respectively. Other status values correspond to the integer returned by $\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()$ function. }
+
+ 
+
+\subsection{\textcolor{Chapter }{GetQSLPsol{\textunderscore}dual}}
+\logpage{[ 3, 1, 6 ]}\nobreak
+\hyperdef{L}{X83D6C81084CFA840}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{GetQSLPsol{\textunderscore}dual({\mdseries\slshape s})\index{GetQSLPsoldual@\texttt{GetQSLPsol{\textunderscore}dual}}
+\label{GetQSLPsoldual}
+}\hfill{\scriptsize (function)}}\\
+\textbf{\indent Returns:\ }
+A list 
+
+
+
+ This function obtains the primal solution along with the associated vertex
+vertex, for the most recently solved LP. It accepts following arguments: 
+\begin{itemize}
+\item  $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP 
+\end{itemize}
+ Returns A list $[status,val\_rval,val,y\_rval,y]$ if optimal solution exists and a list $[status]$ otherwise. If $status=1$, $val\_rval$ and $x\_rval$ indicate validity of $val$ and $x$ (valid if $1$ and invalid if $-1$) which are optimal solution and (dual) vertex achieving optimal solution
+respectively. Other status values correspond to the integer returned by $\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()$ function. }
 
  }
 

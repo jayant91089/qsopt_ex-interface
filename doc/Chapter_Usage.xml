@@ -7,13 +7,16 @@
 <Section Label="Chapter_Usage_Section_Available_functions">
 <Heading>Available functions</Heading>
 
-In this section we shall look at the functions provided by qsopt_ex-interface.
+In this section we shall look at the functions provided by qsopt_ex-interface. <Math>\texttt{qsopt}\_\texttt{ex-interface}</Math> allows
+GAP to communicate with external LP solver process via a stream object of category IsInputOutputStream(). This steam serves as a
+handle via which one can load/solve/modify linear programs. Note that it is possible to maintain several such steams (and hence LPs)
+at any given time. However, the gap commands to solve/modify these LPs that currently available in this package are blocking functions.
 <ManSection>
-  <Func Arg="obj,A,b,linrows,qs_exec,optargs" Name="SolveLPQS" />
+  <Func Arg="obj,A,b,linrows,qs_exec,optargs" Name="LoadQSLP" />
  <Returns>A list
 </Returns>
  <Description>
-This function solves an LP by involking external qsopt-exact LP solver process.
+This function loads an LP by invoking external qsopt-exact LP solver process.
 It accepts following arguments:
 <List>
 <Item>
@@ -29,11 +32,107 @@ It accepts following arguments:
 <Math>linrows</Math> - A list of indices of members of <Math>A</Math> that are equalities
 </Item>
 <Item>
-<Math>qs\_exec</Math> - A string describing complete path to 'qsi' executable
+<Math>qs\_exec</Math> - A string describing complete path to 'qsi' executable (including 'qsi')
 </Item>
 </List>
-*
-Returns a list <Math>[rval,val\_rval,val,x\_rval,x]</Math>
+Returns a list <Math>[s,rval]</Math> where 's' is a gap object of category IsInputOutputStream() and 'rval'
+<Math>=1/-1</Math> indicates success/failure. If 'rval=1', 's' is ready to be be used to solve linear programs.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="s,obj" Name="LoadQSLPobj" />
+ <Returns>An integer
+</Returns>
+ <Description>
+This function loads a new objective.
+It accepts following arguments:
+<List>
+<Item>
+<Math>s</Math> - gap object of category IsInputOutputStream(), handle to an already loaded LP
+</Item>
+<Item>
+<Math>obj</Math> - Objective function coefficients, provided as a list
+</Item>
+</List>
+Returns an integer 'rval' <Math>=1/-1</Math> that indicate success/failure. If 'rval=1',
+the LP associated with 's' is successfully modified.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="s" Name="SolveQSLP" />
+ <Returns>An integer
+</Returns>
+ <Description>
+This function loads an LP by invoking external qsopt-exact LP solver process.
+It accepts following arguments:
+<List>
+<Item>
+<Math>s</Math> - gap object of category IsInputOutputStream(), handle to an already loaded LP
+</Item>
+<Item>
+<Math>optargs</Math> - A list of optional arguments. Currently supports only one optional argument, which is an integer
+specifying simplex variant to use: <Math>optargs=[1]</Math> for primal simplex, <Math>optargs=[2]</Math> for dual simplex and <Math>optargs=[3]</Math> for either
+</Item>
+</List>
+Returns an integer <Math>status</Math> that is the integer returned by <Math>\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()</Math> function.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="s" Name="FlushQSLP" />
+ <Returns></Returns>
+ <Description>
+This function terminates the external processes associated with given LP handle.
+It accepts following arguments:
+<List>
+<Item>
+<Math>s</Math> - gap object of category IsInputOutputStream(), handle to an already loaded LP
+</Item>
+</List>
+Returns Nothing
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="s" Name="GetQSLPsol_primal" />
+ <Returns>A list
+</Returns>
+ <Description>
+This function obtains the primal solution along with the associated vertex vertex, for the most recently solved LP.
+It accepts following arguments:
+<List>
+<Item>
+<Math>s</Math> - gap object of category IsInputOutputStream(), handle to an already loaded LP
+</Item>
+</List>
+Returns A list <Math>[status,val\_rval,val,x\_rval,x]</Math> if optimal solution exists and a list <Math>[status]</Math> otherwise. If <Math>status=1</Math>,
+<Math>val\_rval</Math> and <Math>x\_rval</Math> indicate validity of <Math>val</Math> and <Math>x</Math> (valid if <Math>1</Math> and invalid if <Math>-1</Math>) which are optimal solution
+and (primal) vertex achieving optimal solution respectively. Other status values correspond to the integer returned by <Math>\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()</Math> function.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="s" Name="GetQSLPsol_dual" />
+ <Returns>A list
+</Returns>
+ <Description>
+This function obtains the primal solution along with the associated vertex vertex, for the most recently solved LP.
+It accepts following arguments:
+<List>
+<Item>
+<Math>s</Math> - gap object of category IsInputOutputStream(), handle to an already loaded LP
+</Item>
+</List>
+Returns A list <Math>[status,val\_rval,val,y\_rval,y]</Math> if optimal solution exists and a list <Math>[status]</Math> otherwise. If <Math>status=1</Math>,
+<Math>val\_rval</Math> and <Math>x\_rval</Math> indicate validity of <Math>val</Math> and <Math>x</Math> (valid if <Math>1</Math> and invalid if <Math>-1</Math>) which are optimal solution
+and (dual) vertex achieving optimal solution respectively. Other status values correspond to the integer returned by <Math>\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()</Math> function.
  </Description>
 </ManSection>
 

@@ -1,2 +1,7 @@
 \indexentry{\textsf{qsopt{\textunderscore}ex-interface}|hyperpage}{3}
-\indexentry{SolveLPQS@\texttt  {SolveLPQS}|hyperpage}{5}
+\indexentry{LoadQSLP@\texttt  {LoadQSLP}|hyperpage}{5}
+\indexentry{LoadQSLPobj@\texttt  {LoadQSLPobj}|hyperpage}{5}
+\indexentry{SolveQSLP@\texttt  {SolveQSLP}|hyperpage}{6}
+\indexentry{FlushQSLP@\texttt  {FlushQSLP}|hyperpage}{6}
+\indexentry{GetQSLPsolprimal@\texttt  {GetQSLPsol{\textunderscore }primal}|hyperpage}{6}
+\indexentry{GetQSLPsoldual@\texttt  {GetQSLPsol{\textunderscore }dual}|hyperpage}{6}
