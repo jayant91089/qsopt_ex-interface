@@ -8,5 +8,7 @@
 \contentsline {subsection}{\numberline {3.1.4}\leavevmode {\color {Chapter }FlushQSLP}}{6}{subsection.3.1.4}
 \contentsline {subsection}{\numberline {3.1.5}\leavevmode {\color {Chapter }GetQSLPsol{\textunderscore }primal}}{6}{subsection.3.1.5}
 \contentsline {subsection}{\numberline {3.1.6}\leavevmode {\color {Chapter }GetQSLPsol{\textunderscore }dual}}{6}{subsection.3.1.6}
+\contentsline {subsection}{\numberline {3.1.7}\leavevmode {\color {Chapter }ChangeQSrhs}}{7}{subsection.3.1.7}
+\contentsline {subsection}{\numberline {3.1.8}\leavevmode {\color {Chapter }DelQSrow}}{7}{subsection.3.1.8}
 \contentsline {chapter}{References}{8}{chapter*.2}
 \contentsline {chapter}{Index}{9}{section*.3}

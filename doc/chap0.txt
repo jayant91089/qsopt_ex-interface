@@ -40,6 +40,8 @@
       3.1-4 FlushQSLP
       3.1-5 GetQSLPsol_primal
       3.1-6 GetQSLPsol_dual
+      3.1-7 ChangeQSrhs
+      3.1-8 DelQSrow
   
   
   [32X

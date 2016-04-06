@@ -77,7 +77,7 @@ DeclareGlobalFunction("LoadQSLPobj");
 #!   specifying simplex variant to use: $optargs=[1]$ for primal simplex, $optargs=[2]$ for dual simplex and $optargs=[3]$ for either
 #! Returns an integer $status$ that is the integer returned by $\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()$ function.
 #! @Returns An integer
-#! @Arguments s
+#! @Arguments s,optargs
 DeclareGlobalFunction("SolveQSLP");
 #! @Description
 #! This function terminates the external processes associated with given LP handle.
@@ -107,6 +107,27 @@ DeclareGlobalFunction("GetQSLPsol_primal");
 #! @Returns A list
 #! @Arguments s
 DeclareGlobalFunction("GetQSLPsol_dual");
+#! @Description
+#! This function changes the value of single rhs coefficient in specified row.
+#! It accepts following arguments:
+#! * $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP
+#! * $row$ - row index of the inequility whose rhs is to be changed
+#! * $coef$ - new rhs coefficient
+#! Returns A an integer which is itself returned by QSopt$\_$ex function $\texttt{mpq}\_\texttt{QSchange}\_\texttt{rhscoef}$
+#! @Returns An integer
+#! @Arguments s,row,coef
+DeclareGlobalFunction("ChangeQSrhs");
+#! @Description
+#! This function deletes the specified row.  (Note that for repeated use, one must
+#! relabel rows as QSopt$\_$ex would treat  eg. the second row as first row if we delete the first row)
+#! It accepts following arguments:
+#! * $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP
+#! * $row$ - row index of the inequility whose rhs is to be changed
+#! Returns A an integer which is itself returned by QSopt$\_$ex function $\texttt{mpq}\_\texttt{QSchange}\_\texttt{rhscoef}$
+#! @Returns An integer
+#! @Arguments s,row
+DeclareGlobalFunction("DelQSrow");
+
 
 DeclareGlobalFunction("qsoptformatstr");
 DeclareGlobalFunction("qsoptformatstr2");

@@ -63,7 +63,7 @@ the LP associated with 's' is successfully modified.
 
 
 <ManSection>
-  <Func Arg="s" Name="SolveQSLP" />
+  <Func Arg="s,optargs" Name="SolveQSLP" />
  <Returns>An integer
 </Returns>
  <Description>
@@ -133,6 +133,50 @@ It accepts following arguments:
 Returns A list <Math>[status,val\_rval,val,y\_rval,y]</Math> if optimal solution exists and a list <Math>[status]</Math> otherwise. If <Math>status=1</Math>,
 <Math>val\_rval</Math> and <Math>x\_rval</Math> indicate validity of <Math>val</Math> and <Math>x</Math> (valid if <Math>1</Math> and invalid if <Math>-1</Math>) which are optimal solution
 and (dual) vertex achieving optimal solution respectively. Other status values correspond to the integer returned by <Math>\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()</Math> function.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="s,row,coef" Name="ChangeQSrhs" />
+ <Returns>An integer
+</Returns>
+ <Description>
+This function changes the value of single rhs coefficient in specified row.
+It accepts following arguments:
+<List>
+<Item>
+<Math>s</Math> - gap object of category IsInputOutputStream(), handle to an already loaded LP
+</Item>
+<Item>
+<Math>row</Math> - row index of the inequility whose rhs is to be changed
+</Item>
+<Item>
+<Math>coef</Math> - new rhs coefficient
+</Item>
+</List>
+Returns A an integer which is itself returned by QSopt<Math>\_</Math>ex function <Math>\texttt{mpq}\_\texttt{QSchange}\_\texttt{rhscoef}</Math>
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="s,row" Name="DelQSrow" />
+ <Returns>An integer
+</Returns>
+ <Description>
+This function deletes the specified row. (Note that for repeated use, one must
+relabel rows as QSopt<Math>\_</Math>ex would treat eg. the second row as first row if we delete the first row)
+It accepts following arguments:
+<List>
+<Item>
+<Math>s</Math> - gap object of category IsInputOutputStream(), handle to an already loaded LP
+</Item>
+<Item>
+<Math>row</Math> - row index of the inequility whose rhs is to be changed
+</Item>
+</List>
+Returns A an integer which is itself returned by QSopt<Math>\_</Math>ex function <Math>\texttt{mpq}\_\texttt{QSchange}\_\texttt{rhscoef}</Math>
  </Description>
 </ManSection>
 

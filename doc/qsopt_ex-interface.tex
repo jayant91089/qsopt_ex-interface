@@ -241,7 +241,7 @@ successfully modified. }
 \subsection{\textcolor{Chapter }{SolveQSLP}}
 \logpage{[ 3, 1, 3 ]}\nobreak
 \hyperdef{L}{X7D6238047D53BB97}{}
-{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SolveQSLP({\mdseries\slshape s})\index{SolveQSLP@\texttt{SolveQSLP}}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SolveQSLP({\mdseries\slshape s, optargs})\index{SolveQSLP@\texttt{SolveQSLP}}
 \label{SolveQSLP}
 }\hfill{\scriptsize (function)}}\\
 \textbf{\indent Returns:\ }
@@ -319,6 +319,50 @@ vertex, for the most recently solved LP. It accepts following arguments:
 \end{itemize}
  Returns A list $[status,val\_rval,val,y\_rval,y]$ if optimal solution exists and a list $[status]$ otherwise. If $status=1$, $val\_rval$ and $x\_rval$ indicate validity of $val$ and $x$ (valid if $1$ and invalid if $-1$) which are optimal solution and (dual) vertex achieving optimal solution
 respectively. Other status values correspond to the integer returned by $\texttt{mpq}\_\texttt{QSget}\_\texttt{status}()$ function. }
+
+ 
+
+\subsection{\textcolor{Chapter }{ChangeQSrhs}}
+\logpage{[ 3, 1, 7 ]}\nobreak
+\hyperdef{L}{X7A09A26783695F12}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ChangeQSrhs({\mdseries\slshape s, row, coef})\index{ChangeQSrhs@\texttt{ChangeQSrhs}}
+\label{ChangeQSrhs}
+}\hfill{\scriptsize (function)}}\\
+\textbf{\indent Returns:\ }
+An integer 
+
+
+
+ This function changes the value of single rhs coefficient in specified row. It
+accepts following arguments: 
+\begin{itemize}
+\item  $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP 
+\item  $row$ - row index of the inequility whose rhs is to be changed 
+\item  $coef$ - new rhs coefficient 
+\end{itemize}
+ Returns A an integer which is itself returned by QSopt$\_$ex function $\texttt{mpq}\_\texttt{QSchange}\_\texttt{rhscoef}$ }
+
+ 
+
+\subsection{\textcolor{Chapter }{DelQSrow}}
+\logpage{[ 3, 1, 8 ]}\nobreak
+\hyperdef{L}{X78E2B3C1859938AB}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{DelQSrow({\mdseries\slshape s, row})\index{DelQSrow@\texttt{DelQSrow}}
+\label{DelQSrow}
+}\hfill{\scriptsize (function)}}\\
+\textbf{\indent Returns:\ }
+An integer 
+
+
+
+ This function deletes the specified row. (Note that for repeated use, one must
+relabel rows as QSopt$\_$ex would treat eg. the second row as first row if we delete the first row) It
+accepts following arguments: 
+\begin{itemize}
+\item  $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP 
+\item  $row$ - row index of the inequility whose rhs is to be changed 
+\end{itemize}
+ Returns A an integer which is itself returned by QSopt$\_$ex function $\texttt{mpq}\_\texttt{QSchange}\_\texttt{rhscoef}$ }
 
  }
 

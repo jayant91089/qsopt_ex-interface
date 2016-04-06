@@ -5,3 +5,5 @@
 \indexentry{FlushQSLP@\texttt  {FlushQSLP}|hyperpage}{6}
 \indexentry{GetQSLPsolprimal@\texttt  {GetQSLPsol{\textunderscore }primal}|hyperpage}{6}
 \indexentry{GetQSLPsoldual@\texttt  {GetQSLPsol{\textunderscore }dual}|hyperpage}{6}
+\indexentry{ChangeQSrhs@\texttt  {ChangeQSrhs}|hyperpage}{7}
+\indexentry{DelQSrow@\texttt  {DelQSrow}|hyperpage}{7}

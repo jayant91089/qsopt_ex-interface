@@ -388,3 +388,30 @@ function(s)
 WriteLine(s,"2 ");
 CloseStream(s);
 end);
+
+InstallGlobalFunction(DelQSrow,
+function(s,row)
+local istr,i;
+WriteLine(s,Concatenation("7 ",String(row-1)));
+istr:=ReadLine(s);
+istr:=Concatenation("local delrow_rval;",istr,"return delrow_rval;");
+i := InputTextString( istr);;
+return ReadAsFunction(i)();;
+end);
+
+InstallGlobalFunction(ChangeQSrhs,
+function(s,row,coef)
+local istr,i;
+if DenominatorRat(coef)=1 then
+  WriteLine(s,Concatenation("8 2 ",String(row-1)," ",String(coef)));
+else
+  WriteLine(s,Concatenation("8 3 ",String(row-1)," ",String(NumeratorRat(coef))," ",String(DenominatorRat(coef))));
+fi;
+istr:=ReadLine(s);
+istr:=Concatenation("local rhs_rval;",istr,"return rhs_rval;");
+i := InputTextString( istr);;
+return ReadAsFunction(i)();;
+end);
+
+redund:= function(A,b,linrows)
+end;

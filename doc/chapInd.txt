@@ -2,6 +2,8 @@
   
   [1XIndex[101X
   
+  [2XChangeQSrhs[102X  3.1-7
+  [2XDelQSrow[102X  3.1-8
   [2XFlushQSLP[102X  3.1-4
   [2XGetQSLPsol_dual[102X  3.1-6
   [2XGetQSLPsol_primal[102X  3.1-5

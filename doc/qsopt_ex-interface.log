@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.4.4)  4 APR 2016 19:29
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.4.4)  6 APR 2016 18:48
 entering extended mode
  %&-line parsing enabled.
 **qsopt_ex-interface
@@ -800,10 +800,10 @@ File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 
 ]) (./qsopt_ex-interface.aux) ) 
 Here is how much of TeX's memory you used:
- 6168 strings out of 495061
- 87524 string characters out of 1182622
- 149924 words of memory out of 3000000
- 9154 multiletter control sequences out of 15000+50000
+ 6174 strings out of 495061
+ 87617 string characters out of 1182622
+ 150039 words of memory out of 3000000
+ 9156 multiletter control sequences out of 15000+50000
  62372 words of font info for 81 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  38i,6n,36p,668b,357s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -818,9 +818,9 @@ exmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-texlive/font
 s/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/ut
 mr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share
 /texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on qsopt_ex-interface.pdf (9 pages, 143552 bytes).
+Output written on qsopt_ex-interface.pdf (9 pages, 146618 bytes).
 PDF statistics:
- 282 PDF objects out of 1000 (max. 8388607)
- 38 named destinations out of 1000 (max. 500000)
+ 291 PDF objects out of 1000 (max. 8388607)
+ 42 named destinations out of 1000 (max. 500000)
  49 words of extra memory for PDF output out of 10000 (max. 10000000)
 

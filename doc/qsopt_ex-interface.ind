@@ -4,6 +4,14 @@
 
   \indexspace
 
+  \item \texttt  {ChangeQSrhs}, \hyperpage{7}
+
+  \indexspace
+
+  \item \texttt  {DelQSrow}, \hyperpage{7}
+
+  \indexspace
+
   \item \texttt  {FlushQSLP}, \hyperpage{6}
 
   \indexspace

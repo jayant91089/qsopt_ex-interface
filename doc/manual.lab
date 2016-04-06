@@ -15,3 +15,5 @@
 \makelabel{qsopt_ex-interface:FlushQSLP}{3.1.4}{X7E4E00C884F72A22}
 \makelabel{qsopt_ex-interface:GetQSLPsolprimal}{3.1.5}{X79D8E9C482C75CC8}
 \makelabel{qsopt_ex-interface:GetQSLPsoldual}{3.1.6}{X83D6C81084CFA840}
+\makelabel{qsopt_ex-interface:ChangeQSrhs}{3.1.7}{X7A09A26783695F12}
+\makelabel{qsopt_ex-interface:DelQSrow}{3.1.8}{X78E2B3C1859938AB}
