@@ -1,8 +1,8 @@
 #############################################################################
 ##
-##                                                      itap package
+##                                                   qsopt_ex-interface package
 ##
-##  Copyright 2015,           Jayant Apte and John Walsh, Drexel University
+##  Copyright 2016,                              Jayant Apte, Drexel University
 ##
 ##  The .gd file containing global function declarations and the documentation
 ##  of the itap package. The documentation is written using the AutoDoc Package.
@@ -127,7 +127,35 @@ DeclareGlobalFunction("ChangeQSrhs");
 #! @Returns An integer
 #! @Arguments s,row
 DeclareGlobalFunction("DelQSrow");
-
+#! @Description
+#! This function changes the sense (equality or inequality) of a particular row.
+#! It accepts following arguments:
+#! * $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP
+#! * $row$ - row index of the inequility whose sense is to be changed
+#! * $newsense$ - A single character string describing the new sense, "L" for $\leq$ and "E" for $=$
+#! Returns A an integer which is itself returned by QSopt$\_$ex function $\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}$
+#! @Returns An integer
+#! @Arguments s,row,coef
+DeclareGlobalFunction("ChangeQSsense");
+#! @Description
+#! This function changes a particular coefficient in the constraint matrix.
+#! It accepts following arguments:
+#! * $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP
+#! * $row$ - row index of the inequility to which the coefficient to be changed belongs
+#! * $col$ - column index of the inequility whose sense is to be changed
+#! * $coef$ - A rational number or an integer
+#! Returns A an integer which is itself returned by QSopt$\_$ex function $\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}$
+#! @Returns An integer
+#! @Arguments s,row,coef
+DeclareGlobalFunction("ChangeQScoef");
+#! @Description
+#! This function displays an already loaded LP.
+#! It accepts following arguments:
+#! * $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP
+#! Returns Nothing
+#! @Returns Nothing
+#! @Arguments s
+DeclareGlobalFunction("DisplayLPQS");
 
 DeclareGlobalFunction("qsoptformatstr");
 DeclareGlobalFunction("qsoptformatstr2");

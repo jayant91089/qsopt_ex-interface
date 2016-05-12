@@ -2,14 +2,15 @@
   
   [1XReferences[101X
   
-  [[20XACDE09[120X]  [16XDavid Applegate, , William Cook, , Sanjeeb Dash, and Espinoza, D.[116X, [17XQSopt-ex 2.6 ---
-  A computer algebra system for polynomial computations[117X (2009).
+  [[20XACDE09[120X]  [16XDavid Applegate, , William Cook, , Sanjeeb Dash, and Espinoza, D.[116X,
+  [17XQSopt-ex  2.6  ---  A  computer  algebra  system for polynomial computations[117X
+  (2009).
   
-  [[20XGt15[120X]  [16XGranlund,  T.  and  development  team,  t.  G.[116X,  [17XGNU  MP:  The GNU Multiple Precision
-  Arithmetic Library 6.0.0[117X (2015).
+  [[20XGt15[120X]  [16XGranlund,  T.  and development team, t. G.[116X, [17XGNU MP: The GNU Multiple
+  Precision Arithmetic Library 6.0.0[117X (2015).
   
-  [[20XSte15[120X]  [16XSteffensen, J. L.[116X, [17XQSopt-ex 2.5.10 patch 3 - A fork adding improvements to the build
-  system, library and a Python interface[117X (2015).
+  [[20XSte15[120X]  [16XSteffensen,  J.  L.[116X,  [17XQSopt-ex  2.5.10  patch  3  -  A  fork adding
+  improvements to the build system, library and a Python interface[117X (2015).
   
   
   

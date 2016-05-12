@@ -33,6 +33,9 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83D6C81084CFA840">3.1-6 GetQSLPsol_dual</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A09A26783695F12">3.1-7 ChangeQSrhs</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78E2B3C1859938AB">3.1-8 DelQSrow</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E5E3CAB7C48B062">3.1-9 ChangeQSsense</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E5D355C8021531E">3.1-10 ChangeQScoef</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7B47C76B791F69E3">3.1-11 DisplayLPQS</a></span>
 </div></div>
 </div>
 
@@ -204,6 +207,72 @@
 </li>
 </ul>
 <p>Returns A an integer which is itself returned by QSopt<span class="Math">\_</span>ex function <span class="Math">\texttt{mpq}\_\texttt{QSchange}\_\texttt{rhscoef}</span></p>
+
+<p><a id="X7E5E3CAB7C48B062" name="X7E5E3CAB7C48B062"></a></p>
+
+<h5>3.1-9 ChangeQSsense</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChangeQSsense</code>( <var class="Arg">s</var>, <var class="Arg">row</var>, <var class="Arg">coef</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: An integer</p>
+
+<p>This function changes the sense (equality or inequality) of a particular row. It accepts following arguments:</p>
+
+
+<ul>
+<li><p><span class="Math">s</span> - gap object of category IsInputOutputStream(), handle to an already loaded LP</p>
+
+</li>
+<li><p><span class="Math">row</span> - row index of the inequility whose sense is to be changed</p>
+
+</li>
+<li><p><span class="Math">newsense</span> - A single character string describing the new sense, "L" for <span class="Math">\leq</span> and "E" for <span class="Math">=</span></p>
+
+</li>
+</ul>
+<p>Returns A an integer which is itself returned by QSopt<span class="Math">\_</span>ex function <span class="Math">\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}</span></p>
+
+<p><a id="X7E5D355C8021531E" name="X7E5D355C8021531E"></a></p>
+
+<h5>3.1-10 ChangeQScoef</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChangeQScoef</code>( <var class="Arg">s</var>, <var class="Arg">row</var>, <var class="Arg">coef</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: An integer</p>
+
+<p>This function changes a particular coefficient in the constraint matrix. It accepts following arguments:</p>
+
+
+<ul>
+<li><p><span class="Math">s</span> - gap object of category IsInputOutputStream(), handle to an already loaded LP</p>
+
+</li>
+<li><p><span class="Math">row</span> - row index of the inequility to which the coefficient to be changed belongs</p>
+
+</li>
+<li><p><span class="Math">col</span> - column index of the inequility whose sense is to be changed</p>
+
+</li>
+<li><p><span class="Math">coef</span> - A rational number or an integer</p>
+
+</li>
+</ul>
+<p>Returns A an integer which is itself returned by QSopt<span class="Math">\_</span>ex function <span class="Math">\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}</span></p>
+
+<p><a id="X7B47C76B791F69E3" name="X7B47C76B791F69E3"></a></p>
+
+<h5>3.1-11 DisplayLPQS</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DisplayLPQS</code>( <var class="Arg">s</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Returns: Nothing</p>
+
+<p>This function displays an already loaded LP. It accepts following arguments:</p>
+
+
+<ul>
+<li><p><span class="Math">s</span> - gap object of category IsInputOutputStream(), handle to an already loaded LP</p>
+
+</li>
+</ul>
+<p>Returns Nothing</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>

@@ -153,3 +153,55 @@
   [33X[0;0YReturns  A  an  integer  which  is  itself  returned  by  QSopt[23X\_[123Xex function
   [23X\texttt{mpq}\_\texttt{QSchange}\_\texttt{rhscoef}[123X[133X
   
+  [1X3.1-9 ChangeQSsense[101X
+  
+  [29X[2XChangeQSsense[102X( [3Xs[103X, [3Xrow[103X, [3Xcoef[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10YAn integer[133X
+  
+  [33X[0;0YThis  function  changes  the  sense (equality or inequality) of a particular
+  row. It accepts following arguments:[133X
+  
+  [30X    [33X[0;6Y[23Xs[123X - gap object of category IsInputOutputStream(), handle to an already
+        loaded LP[133X
+  
+  [30X    [33X[0;6Y[23Xrow[123X - row index of the inequility whose sense is to be changed[133X
+  
+  [30X    [33X[0;6Y[23Xnewsense[123X - A single character string describing the new sense, "L" for
+        [23X\leq[123X and "E" for [23X=[123X[133X
+  
+  [33X[0;0YReturns  A  an  integer  which  is  itself  returned  by  QSopt[23X\_[123Xex function
+  [23X\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}[123X[133X
+  
+  [1X3.1-10 ChangeQScoef[101X
+  
+  [29X[2XChangeQScoef[102X( [3Xs[103X, [3Xrow[103X, [3Xcoef[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10YAn integer[133X
+  
+  [33X[0;0YThis  function changes a particular coefficient in the constraint matrix. It
+  accepts following arguments:[133X
+  
+  [30X    [33X[0;6Y[23Xs[123X - gap object of category IsInputOutputStream(), handle to an already
+        loaded LP[133X
+  
+  [30X    [33X[0;6Y[23Xrow[123X  -  row  index  of  the  inequility to which the coefficient to be
+        changed belongs[133X
+  
+  [30X    [33X[0;6Y[23Xcol[123X - column index of the inequility whose sense is to be changed[133X
+  
+  [30X    [33X[0;6Y[23Xcoef[123X - A rational number or an integer[133X
+  
+  [33X[0;0YReturns  A  an  integer  which  is  itself  returned  by  QSopt[23X\_[123Xex function
+  [23X\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}[123X[133X
+  
+  [1X3.1-11 DisplayLPQS[101X
+  
+  [29X[2XDisplayLPQS[102X( [3Xs[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10YNothing[133X
+  
+  [33X[0;0YThis function displays an already loaded LP. It accepts following arguments:[133X
+  
+  [30X    [33X[0;6Y[23Xs[123X - gap object of category IsInputOutputStream(), handle to an already
+        loaded LP[133X
+  
+  [33X[0;0YReturns Nothing[133X
+  

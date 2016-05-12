@@ -17,3 +17,6 @@
 \makelabel{qsopt_ex-interface:GetQSLPsoldual}{3.1.6}{X83D6C81084CFA840}
 \makelabel{qsopt_ex-interface:ChangeQSrhs}{3.1.7}{X7A09A26783695F12}
 \makelabel{qsopt_ex-interface:DelQSrow}{3.1.8}{X78E2B3C1859938AB}
+\makelabel{qsopt_ex-interface:ChangeQSsense}{3.1.9}{X7E5E3CAB7C48B062}
+\makelabel{qsopt_ex-interface:ChangeQScoef}{3.1.10}{X7E5D355C8021531E}
+\makelabel{qsopt_ex-interface:DisplayLPQS}{3.1.11}{X7B47C76B791F69E3}

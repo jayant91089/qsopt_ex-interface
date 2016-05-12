@@ -4,11 +4,14 @@
 
   \indexspace
 
+  \item \texttt  {ChangeQScoef}, \hyperpage{8}
   \item \texttt  {ChangeQSrhs}, \hyperpage{7}
+  \item \texttt  {ChangeQSsense}, \hyperpage{7}
 
   \indexspace
 
   \item \texttt  {DelQSrow}, \hyperpage{7}
+  \item \texttt  {DisplayLPQS}, \hyperpage{8}
 
   \indexspace
 

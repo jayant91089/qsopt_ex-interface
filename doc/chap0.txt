@@ -42,6 +42,9 @@
       3.1-6 GetQSLPsol_dual
       3.1-7 ChangeQSrhs
       3.1-8 DelQSrow
+      3.1-9 ChangeQSsense
+      3.1-10 ChangeQScoef
+      3.1-11 DisplayLPQS
   
   
   [32X

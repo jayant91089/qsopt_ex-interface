@@ -181,6 +181,72 @@ Returns A an integer which is itself returned by QSopt<Math>\_</Math>ex function
 </ManSection>
 
 
+<ManSection>
+  <Func Arg="s,row,coef" Name="ChangeQSsense" />
+ <Returns>An integer
+</Returns>
+ <Description>
+This function changes the sense (equality or inequality) of a particular row.
+It accepts following arguments:
+<List>
+<Item>
+<Math>s</Math> - gap object of category IsInputOutputStream(), handle to an already loaded LP
+</Item>
+<Item>
+<Math>row</Math> - row index of the inequility whose sense is to be changed
+</Item>
+<Item>
+<Math>newsense</Math> - A single character string describing the new sense, "L" for <Math>\leq</Math> and "E" for <Math>=</Math>
+</Item>
+</List>
+Returns A an integer which is itself returned by QSopt<Math>\_</Math>ex function <Math>\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}</Math>
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="s,row,coef" Name="ChangeQScoef" />
+ <Returns>An integer
+</Returns>
+ <Description>
+This function changes a particular coefficient in the constraint matrix.
+It accepts following arguments:
+<List>
+<Item>
+<Math>s</Math> - gap object of category IsInputOutputStream(), handle to an already loaded LP
+</Item>
+<Item>
+<Math>row</Math> - row index of the inequility to which the coefficient to be changed belongs
+</Item>
+<Item>
+<Math>col</Math> - column index of the inequility whose sense is to be changed
+</Item>
+<Item>
+<Math>coef</Math> - A rational number or an integer
+</Item>
+</List>
+Returns A an integer which is itself returned by QSopt<Math>\_</Math>ex function <Math>\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}</Math>
+ </Description>
+</ManSection>
+
+
+<ManSection>
+  <Func Arg="s" Name="DisplayLPQS" />
+ <Returns>Nothing
+</Returns>
+ <Description>
+This function displays an already loaded LP.
+It accepts following arguments:
+<List>
+<Item>
+<Math>s</Math> - gap object of category IsInputOutputStream(), handle to an already loaded LP
+</Item>
+</List>
+Returns Nothing
+ </Description>
+</ManSection>
+
+
 </Section>
 
 

@@ -364,6 +364,70 @@ accepts following arguments:
 \end{itemize}
  Returns A an integer which is itself returned by QSopt$\_$ex function $\texttt{mpq}\_\texttt{QSchange}\_\texttt{rhscoef}$ }
 
+ 
+
+\subsection{\textcolor{Chapter }{ChangeQSsense}}
+\logpage{[ 3, 1, 9 ]}\nobreak
+\hyperdef{L}{X7E5E3CAB7C48B062}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ChangeQSsense({\mdseries\slshape s, row, coef})\index{ChangeQSsense@\texttt{ChangeQSsense}}
+\label{ChangeQSsense}
+}\hfill{\scriptsize (function)}}\\
+\textbf{\indent Returns:\ }
+An integer 
+
+
+
+ This function changes the sense (equality or inequality) of a particular row.
+It accepts following arguments: 
+\begin{itemize}
+\item  $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP 
+\item  $row$ - row index of the inequility whose sense is to be changed 
+\item  $newsense$ - A single character string describing the new sense, "L" for $\leq$ and "E" for $=$ 
+\end{itemize}
+ Returns A an integer which is itself returned by QSopt$\_$ex function $\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}$ }
+
+ 
+
+\subsection{\textcolor{Chapter }{ChangeQScoef}}
+\logpage{[ 3, 1, 10 ]}\nobreak
+\hyperdef{L}{X7E5D355C8021531E}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ChangeQScoef({\mdseries\slshape s, row, coef})\index{ChangeQScoef@\texttt{ChangeQScoef}}
+\label{ChangeQScoef}
+}\hfill{\scriptsize (function)}}\\
+\textbf{\indent Returns:\ }
+An integer 
+
+
+
+ This function changes a particular coefficient in the constraint matrix. It
+accepts following arguments: 
+\begin{itemize}
+\item  $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP 
+\item  $row$ - row index of the inequility to which the coefficient to be changed belongs 
+\item  $col$ - column index of the inequility whose sense is to be changed 
+\item  $coef$ - A rational number or an integer 
+\end{itemize}
+ Returns A an integer which is itself returned by QSopt$\_$ex function $\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}$ }
+
+ 
+
+\subsection{\textcolor{Chapter }{DisplayLPQS}}
+\logpage{[ 3, 1, 11 ]}\nobreak
+\hyperdef{L}{X7B47C76B791F69E3}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{DisplayLPQS({\mdseries\slshape s})\index{DisplayLPQS@\texttt{DisplayLPQS}}
+\label{DisplayLPQS}
+}\hfill{\scriptsize (function)}}\\
+\textbf{\indent Returns:\ }
+Nothing 
+
+
+
+ This function displays an already loaded LP. It accepts following arguments: 
+\begin{itemize}
+\item  $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP 
+\end{itemize}
+ Returns Nothing }
+
  }
 
  }

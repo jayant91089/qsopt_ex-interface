@@ -7,3 +7,6 @@
 \indexentry{GetQSLPsoldual@\texttt  {GetQSLPsol{\textunderscore }dual}|hyperpage}{6}
 \indexentry{ChangeQSrhs@\texttt  {ChangeQSrhs}|hyperpage}{7}
 \indexentry{DelQSrow@\texttt  {DelQSrow}|hyperpage}{7}
+\indexentry{ChangeQSsense@\texttt  {ChangeQSsense}|hyperpage}{7}
+\indexentry{ChangeQScoef@\texttt  {ChangeQScoef}|hyperpage}{8}
+\indexentry{DisplayLPQS@\texttt  {DisplayLPQS}|hyperpage}{8}
