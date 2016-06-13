@@ -8,8 +8,242 @@
 ##
 ################################################################################
 
-##
+## Utility functions
 
+##Utility functions
+if not IsBound(DeepCopy_lol) then
+DeepCopy_lol:=function(lol)
+  local olol,l;
+  olol:=[];
+  for l in lol do
+  Append(olol,[ShallowCopy(l)]);
+  od;
+  return olol;
+end;
+fi;
+
+if not IsBound(RecNamesInt) then
+RecNamesInt:=function(r)
+  # Returns all values in a record
+  local i,intnames;
+  intnames:=[];
+  for i in RecNames(r) do
+   Append(intnames,[Int(i)]);
+  od;
+  return intnames;
+end;
+fi;
+
+if not IsBound(skipline) then
+skipline:=function(str,i)
+local j;
+if i>Size(str) or i<0 then
+  return -1;
+fi;
+for j in [i..Size(str)] do
+  if str[j]='\n' then
+    if j=Size(str) then
+      return -1;
+    else
+      return j+1;
+    fi;
+  fi;
+od;
+return -1;
+end;
+fi;
+
+
+if not IsBound(set2int) then
+set2int:=function(s)
+  local i,j;
+  i:=0;
+  for j in s do
+    i:=i+2^(Int(j)-1);
+  od;
+  return i;
+end;
+fi;
+
+if not IsBound(GenShannonBounded) then
+GenShannonBounded:=function(n)
+local rlist,mtx,str,i,j,shineq,nset_i,ineq,pairs,p,Klist,K,nset_ij,greq,neq,A,b,sum2one,s;
+shineq:=[];
+# first add H(X_i|rest)>=0 type inequalities
+for i in [1..n] do
+  nset_i:=[1..n];
+  SubtractSet(nset_i,[i]);
+  ineq:=ZeroMutable([1..2^n]);
+  ineq[set2int([1..n])+1]:=1;
+  ineq[set2int(nset_i)+1]:=-1;
+  Append(shineq,[ineq]);
+od;
+# second, add I(X_i,X_j|X_K) >=0
+pairs:=Combinations([1..n],2);
+for p in pairs do
+  nset_ij:=[1..n];
+  SubtractSet(nset_ij,p);
+  Klist:=Combinations(nset_ij);
+  for K in Klist do
+    ineq:=ZeroMutable([1..2^n]);
+    ineq[set2int(Union(K,[p[1]]))+1]:=1;
+    ineq[set2int(Union(K,[p[2]]))+1]:=1;
+    ineq[set2int(Union(K,p))+1]:=-1;
+    if Size(K)>0 then
+      ineq[set2int(K)+1]:=-1;
+    fi;
+    Append(shineq,[ineq]);
+  od;
+od;
+shineq:=-shineq;
+sum2one:=ZeroMutable([1..2^n-1]);
+for i in [1..2^n-1] do
+sum2one[i]:=1;
+od;
+A:=[];
+b:=[];
+for s in shineq do
+  Append(A,[s{[2..Size(s)]}]);
+  Append(b,[0]);
+od;
+Append(A,[sum2one]);
+Append(b,[1]);
+return [A,b];
+end;
+fi;
+
+if not IsBound(GenShannonUnBounded) then
+GenShannonUnBounded:=function(n)
+local rlist,mtx,str,i,j,shineq,nset_i,ineq,pairs,p,Klist,K,nset_ij,greq,neq,A,b,sum2one,s;
+shineq:=[];
+# first add H(X_i|rest)>=0 type inequalities
+for i in [1..n] do
+  nset_i:=[1..n];
+  SubtractSet(nset_i,[i]);
+  ineq:=ZeroMutable([1..2^n]);
+  ineq[set2int([1..n])+1]:=1;
+  ineq[set2int(nset_i)+1]:=-1;
+  Append(shineq,[ineq]);
+od;
+# second, add I(X_i,X_j|X_K) >=0
+pairs:=Combinations([1..n],2);
+for p in pairs do
+  nset_ij:=[1..n];
+  SubtractSet(nset_ij,p);
+  Klist:=Combinations(nset_ij);
+  for K in Klist do
+    ineq:=ZeroMutable([1..2^n]);
+    ineq[set2int(Union(K,[p[1]]))+1]:=1;
+    ineq[set2int(Union(K,[p[2]]))+1]:=1;
+    ineq[set2int(Union(K,p))+1]:=-1;
+    if Size(K)>0 then
+      ineq[set2int(K)+1]:=-1;
+    fi;
+    Append(shineq,[ineq]);
+  od;
+od;
+shineq:=-shineq;
+sum2one:=ZeroMutable([1..2^n-1]);
+for i in [1..2^n-1] do
+sum2one[i]:=1;
+od;
+A:=[];
+b:=[];
+for s in shineq do
+  Append(A,[s{[2..Size(s)]}]);
+  Append(b,[0]);
+od;
+#Append(A,[sum2one]);
+#Append(b,[1]);
+return [A,b];
+end;
+fi;
+
+if not IsBound(DeepSort) then
+DeepSort:=function(list,nlevels,l)
+  local soretdlist,i;
+  # l is current level
+  # level:=1: only ``list`` is sorted at top level
+  # level:=2: each element of list is also sorted and so on...
+  # levels 1 and nlevels won't be sorted
+  if nlevels = 1 then
+    return list;
+  fi;
+  if nlevels=l then
+    return list;
+  else
+    soretdlist:=EmptyPlist(Size(list));
+    for i in [1..Size(list)] do
+      soretdlist[i]:=DeepSort(list[i],nlevels,l+1);
+      od;
+    return soretdlist;
+  fi;
+end;
+fi;
+
+if not IsBound(nextnum) then
+nextnum:=function(str,i)
+local foundnum, j,k,isneg;
+if i>Size(str) or i<0 then
+  return -1;
+fi;
+foundnum:=false;
+isneg:=false;
+for j in [i..Size(str)] do
+  if not str[j]=' ' then
+    if IsDigitChar(str[j]) then
+      if j-1>=1 and str[j-1]='-' then
+        isneg:=true;
+      fi;
+      foundnum:=true;
+      break;
+    fi;
+  fi;
+od;
+if foundnum=false then
+ return [false,-1,-1]; # [found?, number, next_i]
+fi;
+for k in [j+1..Size(str)] do
+  if not IsDigitChar(str[k]) then
+    break;
+  fi;
+od;
+if isneg=true then
+  return [true,Int(str{[j-1..k-1]}),k];
+else
+  return [true,Int(str{[j..k-1]}),k];
+fi;
+end;
+fi;
+
+if not IsBound(writeinefile) then
+writeinefile:=function(fname,lin,mtx)
+local ostr,row,i,r;
+ostr:="";
+if Size(lin)=0 then
+  ostr:=Concatenation(ostr,"H-representation\nbegin\n",String(Size(mtx))," ",String(Size(mtx[1])), " rational\n");
+else
+  ostr:= Concatenation(ostr,"H-representation\n","linearity ",String(Size(lin))," ");
+  for r in lin do
+      ostr:=Concatenation(ostr,String(r)," ");
+  od;
+  ostr:=Concatenation(ostr,"\nbegin\n",String(Size(mtx))," ",String(Size(mtx[1])), " rational\n");
+fi;
+for i in [1..Size(mtx)] do
+    row:=mtx[i];
+    #ostr:=Concatenation(ostr,"0 ");
+    for r in row do
+        ostr:=Concatenation(ostr,String(r)," ");
+    od;
+    ostr:=Concatenation(ostr,"\n");
+od;
+ostr:=Concatenation(ostr,"end");
+PrintTo(fname,ostr);
+end;
+fi;
+
+
+## QSopt_ex-interface functions
 InstallGlobalFunction(qsoptformatstr,
 function(obj,A,b,linrows,optargs)
 local At,cmatval,cmatcnt,cmatind,sense,i,j,c,r,ccnt,x,ostr,hasrat,qs_algo;
@@ -413,5 +647,38 @@ i := InputTextString( istr);;
 return ReadAsFunction(i)();;
 end);
 
-redund:= function(A,b,linrows)
-end;
+InstallGlobalFunction(ChangeQSsense,
+function(s,row,newsense)
+# newsense is a string "L" or "E"
+local istr,i;
+if newsense="L" then
+  WriteLine(s,Concatenation("9 2 ",String(row-1)," ",String(76)));
+else
+  WriteLine(s,Concatenation("9 2 ",String(row-1)," ",String(69)));
+fi;
+istr:=ReadLine(s);
+istr:=Concatenation("local sense_rval;",istr,"return sense_rval;");
+i := InputTextString( istr);;
+return ReadAsFunction(i)();;
+end);
+
+InstallGlobalFunction(ChangeQScoef,
+function(s,row,col,coef)
+local istr,i;
+if DenominatorRat(coef)=1 then
+  WriteLine(s,Concatenation("10 3 ",String(row-1)," ",String(col-1)," ",String(coef)));
+else
+  WriteLine(s,Concatenation("10 4 ",String(row-1)," ",String(col-1)," ",String(NumeratorRat(coef))," ",String(DenominatorRat(coef))));
+fi;
+istr:=ReadLine(s);
+istr:=Concatenation("local coef_rval;",istr,"return coef_rval;");
+i := InputTextString( istr);;
+return ReadAsFunction(i)();;
+end);
+
+InstallGlobalFunction(DisplayLPQS,
+function(s)
+  WriteLine(s,"11");
+end);
+
+qs_exec:="";
