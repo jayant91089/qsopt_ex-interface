@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.4.4)  12 MAY 2016 12:21
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.4.4)  13 JUN 2016 20:14
 entering extended mode
  %&-line parsing enabled.
 **qsopt_ex-interface
@@ -769,7 +769,7 @@ opt_ex-interface[][] \T1/ptm/m/n/10.95 and un-pack it us-ing
  []
 
 
-Underfull \hbox (badness 5652) in paragraph at lines 158--163
+Underfull \hbox (badness 5652) in paragraph at lines 158--162
 []\T1/ptm/m/n/10.95 Once un-packed, go to $[][][]$ di-rec-tory and run the in-s
 tall script
  []
@@ -779,48 +779,52 @@ tall script
 ]
 Chapter 3.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 195.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 194.
 [5
 
-] [6] [7] (./qsopt_ex-interface.bbl (./qsopt_ex-interface.brf)
+] [6] [7]
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 439.
+ [8] [9] (./qsopt_ex-interface.bbl (./qsopt_ex-interface.brf)
 \tf@brf=\write8
 \openout8 = `qsopt_ex-interface.brf'.
 
- [8]) [9
 
-]
-(./qsopt_ex-interface.ind
+[10]) [11
+
+] (./qsopt_ex-interface.ind
 LaTeX Font Info:    Try loading font information for T1+phv on input line 3.
- (/usr/share/texmf-texlive/tex/latex/psnfss/t1phv.fd
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
-)
-[10
+) [12
 
 
 
-]) (./qsopt_ex-interface.aux) ) 
+])
+(./qsopt_ex-interface.aux) ) 
 Here is how much of TeX's memory you used:
- 6184 strings out of 495061
- 87773 string characters out of 1182622
- 150223 words of memory out of 3000000
- 9159 multiletter control sequences out of 15000+50000
+ 6191 strings out of 495061
+ 87876 string characters out of 1182622
+ 151271 words of memory out of 3000000
+ 9162 multiletter control sequences out of 15000+50000
  62372 words of font info for 81 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 38i,6n,36p,668b,433s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8
-r.enc} </home/aspitrg3-users/jayant/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecst
-1095.600pk> </home/aspitrg3-users/jayant/.texmf-var/fonts/pk/ljfour/jknappen/ec
-/ectt1095.600pk> </home/aspitrg3-users/jayant/.texmf-var/fonts/pk/ljfour/jknapp
-en/ec/ectt1000.600pk></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
-mmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></
-usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
-exmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-texlive/font
-s/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/ut
-mr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share
-/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on qsopt_ex-interface.pdf (10 pages, 150346 bytes).
+ 38i,6n,36p,670b,531s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.e
+nc} </home/aspitrg3-users/jayant/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecst109
+5.600pk> </home/aspitrg3-users/jayant/.texmf-var/fonts/pk/ljfour/jknappen/ec/ec
+tt1095.600pk> </home/aspitrg3-users/jayant/.texmf-var/fonts/pk/ljfour/jknappen/
+ec/ectt1000.600pk></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi
+10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texm
+f-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-texlive/fonts/t
+ype1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8
+a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/te
+xmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on qsopt_ex-interface.pdf (12 pages, 164472 bytes).
 PDF statistics:
- 306 PDF objects out of 1000 (max. 8388607)
- 49 named destinations out of 1000 (max. 500000)
- 49 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 346 PDF objects out of 1000 (max. 8388607)
+ 53 named destinations out of 1000 (max. 500000)
+ 57 words of extra memory for PDF output out of 10000 (max. 10000000)
 

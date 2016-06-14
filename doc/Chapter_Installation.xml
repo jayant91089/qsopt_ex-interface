@@ -8,7 +8,7 @@ Assuming you already have GAP 4.5+ installed, you can follow the steps below to 
 <List>
 <Item>
 To get the newest version of <Math>\texttt{qsopt}\_\texttt{ex-interface}</Math>, download the .zip archive from <URL>https://github.com/jayant91089/qsopt_ex-interface</URL>
-and unpack it using <Math>\texttt{unzip qsopt}\_\texttt{ex-interface-x.zip}</Math> in the terminal.
+and unpack it using '<Math>\texttt{unzip qsopt}\_\texttt{ex-interface-x.zip}</Math>' in the terminal.
 Do this preferably inside the <Math>pkg</Math> subdirectory
 of your GAP 4 installation. It creates a subdirectory called <Math>\texttt{qsopt}\_\texttt{ex-interface}</Math>.
 If you do not know the whereabouts of the <Math>pkg</Math> subdirectory, invoke the following in GAP:
@@ -25,7 +25,7 @@ Once unpacked, go to <Math>\texttt{qsopt}\_\texttt{ex-interface}</Math> director
 run the install script <Math>\texttt{unix-install.sh}</Math> from the terminal as <Math>\texttt{sh unix-install.sh}</Math>.
 This locally installs qsopt exact and its dependencies (GMP <Cite Key="Granlund12"/>,libz and libbz2) in lib and include folders. Alternatively,
 if you have qsopt-exact and GMP already installed on your system, you can edit the Makefile inside <Math>\texttt{qsopt}\_\texttt{ex-interface}</Math> directory
-so that gcc finds the .so libraries. In latter case, you must manually '\texttt{make all}' from the terminal inside <Math>\texttt{qsopt}\_\texttt{ex-interface}</Math> directory.
+so that gcc finds the .so libraries. In latter case, you must manually '<Math>\texttt{make all}</Math>' from the terminal inside <Math>\texttt{qsopt}\_\texttt{ex-interface}</Math> directory.
 </Item>
 <Item>
 Above step creates an executable \texttt{qsi} inside the <Math>\texttt{qsopt}\_\texttt{ex-interface}</Math> directory, which serves as the interface. Note that
@@ -41,5 +41,7 @@ LoadPackage( "qsopt_ex-interface");
 ]]></Listing>
 
 from within GAP.
+To expose more <Math>\texttt{QSopt exact}</Math> functionality to GAP, one can extend the C part of the interface i.e. <Math>\texttt{qsinterface.c}</Math>. The relevent details
+of how the interface works are in <Math>\texttt{qsinterface.c}</Math> itself.
 </Chapter>
 

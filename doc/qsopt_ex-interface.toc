@@ -13,5 +13,6 @@
 \contentsline {subsection}{\numberline {3.1.9}\leavevmode {\color {Chapter }ChangeQSsense}}{7}{subsection.3.1.9}
 \contentsline {subsection}{\numberline {3.1.10}\leavevmode {\color {Chapter }ChangeQScoef}}{8}{subsection.3.1.10}
 \contentsline {subsection}{\numberline {3.1.11}\leavevmode {\color {Chapter }DisplayLPQS}}{8}{subsection.3.1.11}
-\contentsline {chapter}{References}{9}{chapter*.2}
-\contentsline {chapter}{Index}{10}{section*.3}
+\contentsline {section}{\numberline {3.2}\leavevmode {\color {Chapter }Example}}{8}{section.3.2}
+\contentsline {chapter}{References}{11}{chapter*.2}
+\contentsline {chapter}{Index}{12}{section*.3}

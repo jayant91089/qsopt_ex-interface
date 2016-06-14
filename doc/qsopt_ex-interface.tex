@@ -147,7 +147,7 @@ for Unix/Linux systems running GAP $4.5+$. }
   Assuming you already have GAP 4.5+ installed, you can follow the steps below
 to install the package: 
 \begin{itemize}
-\item  To get the newest version of $\texttt{qsopt}\_\texttt{ex-interface}$, download the .zip archive from \href{https://github.com/jayant91089/qsopt_ex-interface} {\texttt{https://github.com/jayant91089/qsopt{\textunderscore}ex-interface}} and unpack it using $\texttt{unzip qsopt}\_\texttt{ex-interface-x.zip}$ in the terminal. Do this preferably inside the $pkg$ subdirectory of your GAP 4 installation. It creates a subdirectory called $\texttt{qsopt}\_\texttt{ex-interface}$. If you do not know the whereabouts of the $pkg$ subdirectory, invoke the following in GAP: 
+\item  To get the newest version of $\texttt{qsopt}\_\texttt{ex-interface}$, download the .zip archive from \href{https://github.com/jayant91089/qsopt_ex-interface} {\texttt{https://github.com/jayant91089/qsopt{\textunderscore}ex-interface}} and unpack it using '$\texttt{unzip qsopt}\_\texttt{ex-interface-x.zip}$' in the terminal. Do this preferably inside the $pkg$ subdirectory of your GAP 4 installation. It creates a subdirectory called $\texttt{qsopt}\_\texttt{ex-interface}$. If you do not know the whereabouts of the $pkg$ subdirectory, invoke the following in GAP: 
 \end{itemize}
  
 \begin{Verbatim}[fontsize=\small,frame=single,label=Code]
@@ -158,8 +158,7 @@ to install the package:
 \item  Once unpacked, go to $\texttt{qsopt}\_\texttt{ex-interface}$ directory and run the install script $\texttt{unix-install.sh}$ from the terminal as $\texttt{sh unix-install.sh}$. This locally installs qsopt exact and its dependencies (GMP \cite{Granlund12},libz and libbz2) in lib and include folders. Alternatively, if you have
 qsopt-exact and GMP already installed on your system, you can edit the
 Makefile inside $\texttt{qsopt}\_\texttt{ex-interface}$ directory so that gcc finds the .so libraries. In latter case, you must
-manually '\texttt{\symbol{92}}texttt\texttt{\symbol{123}}make
-all\texttt{\symbol{125}}' from the terminal inside $\texttt{qsopt}\_\texttt{ex-interface}$ directory. 
+manually '$\texttt{make all}$' from the terminal inside $\texttt{qsopt}\_\texttt{ex-interface}$ directory. 
 \item  Above step creates an executable
 \texttt{\symbol{92}}texttt\texttt{\symbol{123}}qsi\texttt{\symbol{125}} inside
 the $\texttt{qsopt}\_\texttt{ex-interface}$ directory, which serves as the interface. Note that before using the package
@@ -172,7 +171,7 @@ the locally installed libraries.
 \begin{Verbatim}[fontsize=\small,frame=single,label=Code]
   LoadPackage( "qsopt_ex-interface");
 \end{Verbatim}
- from within GAP. }
+ from within GAP. To expose more $\texttt{QSopt exact}$ functionality to GAP, one can extend the C part of the interface i.e. $\texttt{qsinterface.c}$. The relevent details of how the interface works are in $\texttt{qsinterface.c}$ itself. }
 
    
 \chapter{\textcolor{Chapter }{Usage}}\label{Chapter_Usage}
@@ -186,11 +185,11 @@ the locally installed libraries.
 {
   In this section we shall look at the functions provided by
 qsopt{\textunderscore}ex-interface. $\texttt{qsopt}\_\texttt{ex-interface}$ allows GAP to communicate with external LP solver process via a stream object
-of category IsInputOutputStream(). This steam serves as a handle via which one
-can load/solve/modify linear programs. Note that it is possible to maintain
-several such steams (and hence LPs) at any given time. However, the gap
-commands to solve/modify these LPs that currently available in this package
-are blocking functions. 
+of category IsInputOutputStream(). This stream serves as a handle via which
+one can load/solve/modify linear programs. Note that it is possible to
+maintain several such steams (and hence LPs) at any given time. However, the
+gap commands to solve/modify these LPs that are currently available in this
+package are blocking functions. 
 
 \subsection{\textcolor{Chapter }{LoadQSLP}}
 \logpage{[ 3, 1, 1 ]}\nobreak
@@ -249,7 +248,7 @@ An integer
 
 
 
- This function loads an LP by invoking external qsopt-exact LP solver process.
+ This function solves an LP by invoking external qsopt-exact LP solver process.
 It accepts following arguments: 
 \begin{itemize}
 \item  $s$ - gap object of category IsInputOutputStream(), handle to an already loaded LP 
@@ -384,7 +383,7 @@ It accepts following arguments:
 \item  $row$ - row index of the inequility whose sense is to be changed 
 \item  $newsense$ - A single character string describing the new sense, "L" for $\leq$ and "E" for $=$ 
 \end{itemize}
- Returns A an integer which is itself returned by QSopt$\_$ex function $\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}$ }
+ Returns An integer which is itself returned by QSopt$\_$ex function $\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}$ }
 
  
 
@@ -428,6 +427,132 @@ Nothing
 \end{itemize}
  Returns Nothing }
 
+ }
+
+ 
+\section{\textcolor{Chapter }{Example}}\label{Chapter_Usage_Section_Example}
+\logpage{[ 3, 2, 0 ]}
+\hyperdef{L}{X85861B017AEEC50B}{}
+{
+  Following example explains the standard workflow with qsopt $\texttt{qsopt}\_\texttt{ex-interface}$. We show how to load, solve, display and modify a linear program. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+  !gapprompt@gap>| !gapinput@#  absolute path to the interface executable|
+  !gapprompt@>| !gapinput@qs_exec:="/home/aspitrg3-users/jayant/qsopt_interface/dummy";;|
+  !gapprompt@gap>| !gapinput@# Construt a 3-D cube|
+  !gapprompt@>| !gapinput@A:=[[1,0,0],[0,1,0],[0,0,1],[-1,0,0],[0,-1,0],[0,0,-1]];;|
+  !gapprompt@gap>| !gapinput@b:=[1,1,1,0,0,0];;|
+  !gapprompt@gap>| !gapinput@rlist:=LoadQSLP([1,1,1],A,b,[],qs_exec);;|
+  !gapprompt@gap>| !gapinput@rlist[1]; # stdin/stdout handle to the loaded LP|
+  < input/output stream to dummy >
+  !gapprompt@gap>| !gapinput@s:=rlist[1];;|
+  !gapprompt@gap>| !gapinput@DisplayLPQS(s);|
+  Problem
+   prob
+  Maximize
+   obj:   c0 +  c1 +  c2
+  Subject To
+   r0:   c0 <= 1
+   r1:   c1 <= 1
+   r2:   c2 <= 1
+   r3:  -  c0 <= 0
+   r4:  -  c1 <= 0
+   r5:  -  c2 <= 0
+  Bounds
+   c0 free
+   c1 free
+   c2 free
+  End
+  !gapprompt@gap>| !gapinput@SolveQSLP(s,[]); # returns status, 1 for success|
+  1
+  !gapprompt@gap>| !gapinput@rlist:=GetQSLPsol_primal(s);; # get primal solution|
+  !gapprompt@gap>| !gapinput@rlist[1]; # return status|
+  1
+  !gapprompt@gap>| !gapinput@rlist[2]; # val_rval, 0 means sane|
+  0
+  !gapprompt@gap>| !gapinput@rlist[3]; # val, LP solution|
+  3
+  !gapprompt@gap>| !gapinput@rlist[4]; # x_rval, 0 means sane|
+  0
+  !gapprompt@gap>| !gapinput@rlist[5]; # x, optimum vertex|
+  [ 1, 1, 1 ]
+  !gapprompt@gap>| !gapinput@rlist:=GetQSLPsol_dual(s);;  #  get dual solution|
+  !gapprompt@gap>| !gapinput@rlist[1]; # status|
+  1
+  !gapprompt@gap>| !gapinput@rlist[2]; # val_rval|
+  0
+  !gapprompt@gap>| !gapinput@rlist[3]; # val|
+  3
+  !gapprompt@gap>| !gapinput@rlist[4]; # y_rval|
+  0
+  !gapprompt@gap>| !gapinput@rlist[5]; # y|
+  [ 1, 1, 1, 0, 0, 0 ]
+  !gapprompt@gap>| !gapinput@LoadQSLPobj(s,[-1,-1,-1]); # to minimize, negate the objective|
+  1
+  !gapprompt@gap>| !gapinput@SolveQSLP(s,[]); # returns status, 1 for success|
+  1
+  !gapprompt@gap>| !gapinput@rlist:=GetQSLPsol_primal(s);  #  get primal solution|
+  [ 1, 0, 0, 0, [ 0, 0, 0 ] ]
+  !gapprompt@gap>| !gapinput@ChangeQSsense(s,1,"E"); # tighten first inequality (r0)|
+  0
+  !gapprompt@gap>| !gapinput@DisplayLPQS(s);|
+  Problem
+  prob
+  Maximize
+   obj:  -  c0 -  c1 -  c2
+  Subject To
+   r0:   c0 = 1
+   r1:   c1 <= 1
+   r2:   c2 <= 1
+   r3:  -  c0 <= 0
+   r4:  -  c1 <= 0
+   r5:  -  c2 <= 0
+  Bounds
+   c0 free
+   c1 free
+   c2 free
+  End
+  !gapprompt@gap>| !gapinput@ChangeQSrhs(s,1,3/2); # change first row r0's rhs to 3/2|
+  0
+  !gapprompt@gap>| !gapinput@DisplayLPQS(s);|
+  Problem
+  prob
+  Maximize
+  obj:  -  c0 -  c1 -  c2
+  Subject To
+   r0:   c0 = 3/2
+   r1:   c1 <= 1
+   r2:   c2 <= 1
+   r3:  -  c0 <= 0
+   r4:  -  c1 <= 0
+   r5:  -  c2 <= 0
+  Bounds
+   c0 free
+   c1 free
+   c2 free
+  End
+  !gapprompt@gap>| !gapinput@SolveQSLP(s,[]); # returns status, 1 for success|
+  1
+  !gapprompt@gap>| !gapinput@rlist:=GetQSLPsol_primal(s);  #  get primal solution|
+  [ 1, 0, -3/2, 0, [ 3/2, 0, 0 ] ]
+  !gapprompt@gap>| !gapinput@DelQSrow(s,1); # delete the first row|
+  0
+  !gapprompt@gap>| !gapinput@DisplayLPQS(s);|
+  Problem
+  prob
+  Maximize
+   obj:  -  c0 -  c1 -  c2
+  Subject To
+   r1:   c1 <= 1
+   r2:   c2 <= 1
+   r3:  -  c0 <= 0
+   r4:  -  c1 <= 0
+   r5:  -  c2 <= 0
+  Bounds
+   c0 free
+   c1 free
+   c2 free
+  End
+\end{Verbatim}
  }
 
  }

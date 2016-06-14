@@ -45,6 +45,7 @@
       3.1-9 ChangeQSsense
       3.1-10 ChangeQScoef
       3.1-11 DisplayLPQS
+    3.2 [33X[0;0YExample[133X
   
   
   [32X

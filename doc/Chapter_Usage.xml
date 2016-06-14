@@ -8,9 +8,9 @@
 <Heading>Available functions</Heading>
 
 In this section we shall look at the functions provided by qsopt_ex-interface. <Math>\texttt{qsopt}\_\texttt{ex-interface}</Math> allows
-GAP to communicate with external LP solver process via a stream object of category IsInputOutputStream(). This steam serves as a
+GAP to communicate with external LP solver process via a stream object of category IsInputOutputStream(). This stream serves as a
 handle via which one can load/solve/modify linear programs. Note that it is possible to maintain several such steams (and hence LPs)
-at any given time. However, the gap commands to solve/modify these LPs that currently available in this package are blocking functions.
+at any given time. However, the gap commands to solve/modify these LPs that are currently available in this package are blocking functions.
 <ManSection>
   <Func Arg="obj,A,b,linrows,qs_exec,optargs" Name="LoadQSLP" />
  <Returns>A list
@@ -67,7 +67,7 @@ the LP associated with 's' is successfully modified.
  <Returns>An integer
 </Returns>
  <Description>
-This function loads an LP by invoking external qsopt-exact LP solver process.
+This function solves an LP by invoking external qsopt-exact LP solver process.
 It accepts following arguments:
 <List>
 <Item>
@@ -199,7 +199,7 @@ It accepts following arguments:
 <Math>newsense</Math> - A single character string describing the new sense, "L" for <Math>\leq</Math> and "E" for <Math>=</Math>
 </Item>
 </List>
-Returns A an integer which is itself returned by QSopt<Math>\_</Math>ex function <Math>\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}</Math>
+Returns An integer which is itself returned by QSopt<Math>\_</Math>ex function <Math>\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}</Math>
  </Description>
 </ManSection>
 
@@ -245,6 +245,134 @@ It accepts following arguments:
 Returns Nothing
  </Description>
 </ManSection>
+
+
+</Section>
+
+
+<Section Label="Chapter_Usage_Section_Example">
+<Heading>Example</Heading>
+
+Following example explains the standard workflow with qsopt <Math>\texttt{qsopt}\_\texttt{ex-interface}</Math>. We show
+how to load, solve, display and modify a linear program.
+<Example><![CDATA[
+gap> #  absolute path to the interface executable
+> qs_exec:="/home/aspitrg3-users/jayant/qsopt_interface/dummy";;
+gap> # Construt a 3-D cube
+> A:=[[1,0,0],[0,1,0],[0,0,1],[-1,0,0],[0,-1,0],[0,0,-1]];;
+gap> b:=[1,1,1,0,0,0];;
+gap> rlist:=LoadQSLP([1,1,1],A,b,[],qs_exec);;
+gap> rlist[1]; # stdin/stdout handle to the loaded LP
+< input/output stream to dummy >
+gap> s:=rlist[1];;
+gap> DisplayLPQS(s);
+Problem
+ prob
+Maximize
+ obj:   c0 +  c1 +  c2
+Subject To
+ r0:   c0 <= 1
+ r1:   c1 <= 1
+ r2:   c2 <= 1
+ r3:  -  c0 <= 0
+ r4:  -  c1 <= 0
+ r5:  -  c2 <= 0
+Bounds
+ c0 free
+ c1 free
+ c2 free
+End
+gap> SolveQSLP(s,[]); # returns status, 1 for success
+1
+gap> rlist:=GetQSLPsol_primal(s);; # get primal solution
+gap> rlist[1]; # return status
+1
+gap> rlist[2]; # val_rval, 0 means sane
+0
+gap> rlist[3]; # val, LP solution
+3
+gap> rlist[4]; # x_rval, 0 means sane
+0
+gap> rlist[5]; # x, optimum vertex
+[ 1, 1, 1 ]
+gap> rlist:=GetQSLPsol_dual(s);;  #  get dual solution
+gap> rlist[1]; # status
+1
+gap> rlist[2]; # val_rval
+0
+gap> rlist[3]; # val
+3
+gap> rlist[4]; # y_rval
+0
+gap> rlist[5]; # y
+[ 1, 1, 1, 0, 0, 0 ]
+gap> LoadQSLPobj(s,[-1,-1,-1]); # to minimize, negate the objective
+1
+gap> SolveQSLP(s,[]); # returns status, 1 for success
+1
+gap> rlist:=GetQSLPsol_primal(s);  #  get primal solution
+[ 1, 0, 0, 0, [ 0, 0, 0 ] ]
+gap> ChangeQSsense(s,1,"E"); # tighten first inequality (r0)
+0
+gap> DisplayLPQS(s);
+Problem
+prob
+Maximize
+ obj:  -  c0 -  c1 -  c2
+Subject To
+ r0:   c0 = 1
+ r1:   c1 <= 1
+ r2:   c2 <= 1
+ r3:  -  c0 <= 0
+ r4:  -  c1 <= 0
+ r5:  -  c2 <= 0
+Bounds
+ c0 free
+ c1 free
+ c2 free
+End
+gap> ChangeQSrhs(s,1,3/2); # change first row r0's rhs to 3/2
+0
+gap> DisplayLPQS(s);
+Problem
+prob
+Maximize
+obj:  -  c0 -  c1 -  c2
+Subject To
+ r0:   c0 = 3/2
+ r1:   c1 <= 1
+ r2:   c2 <= 1
+ r3:  -  c0 <= 0
+ r4:  -  c1 <= 0
+ r5:  -  c2 <= 0
+Bounds
+ c0 free
+ c1 free
+ c2 free
+End
+gap> SolveQSLP(s,[]); # returns status, 1 for success
+1
+gap> rlist:=GetQSLPsol_primal(s);  #  get primal solution
+[ 1, 0, -3/2, 0, [ 3/2, 0, 0 ] ]
+gap> DelQSrow(s,1); # delete the first row
+0
+gap> DisplayLPQS(s);
+Problem
+prob
+Maximize
+ obj:  -  c0 -  c1 -  c2
+Subject To
+ r1:   c1 <= 1
+ r2:   c2 <= 1
+ r3:  -  c0 <= 0
+ r4:  -  c1 <= 0
+ r5:  -  c2 <= 0
+Bounds
+ c0 free
+ c1 free
+ c2 free
+End
+]]></Example>
 
 
 </Section>

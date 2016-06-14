@@ -1,0 +1,51 @@
+#! @BeginExample
+#  absolute path to the interface executable
+qs_exec:="/home/aspitrg3-users/jayant/qsopt_interface/dummy";;
+# Construt a 3-D cube
+A:=[[1,0,0],[0,1,0],[0,0,1],[-1,0,0],[0,-1,0],[0,0,-1]];;
+b:=[1,1,1,0,0,0];;
+rlist:=LoadQSLP([1,1,1],A,b,[],qs_exec);;
+rlist[1]; # stdin/stdout handle to the loaded LP
+#! < input/output stream to dummy >
+DisplayLPQS(s);
+#! Problem
+#!  prob
+#! Maximize
+#!  obj:   c0 +  c1 +  c2
+#! Subject To
+#!  r0:   c0 <= 1
+#!  r1:   c1 <= 1
+#!  r2:   c2 <= 1
+#!  r3:  -  c0 <= 0
+#!  r4:  -  c1 <= 0
+#!  r5:  -  c2 <= 0
+#! Bounds
+#!  c0 free
+#!  c1 free
+#!  c2 free
+#! End
+SolveQSLP(s,[]); # returns status, 1 for success
+#! 1
+rlist:=GetQSLPsol_primal(s);; # get primal solution
+rlist[1]; # return status
+#! 1
+rlist[2]; # val_rval, 0 means sane
+#! 0
+rlist[3]; # val, LP solution
+#! 3
+rlist[4]; # x_rval, 0 means sane
+#! 0
+rlist[5]; # x, optimum vertex
+#! [ 1, 1, 1 ]
+rlist:=GetQSLPsol_dual(s);;  #  get dual solution
+rlist[1]; # status
+#! 1
+rlist[2]; # val_rval
+#! 0
+rlist[3]; # val
+#! 3
+rlist[4]; # y_rval
+#! 0
+rlist[5]; # y
+#! [ 1, 1, 1, 0, 0, 0 ]
+#! @EndExample

@@ -37,6 +37,9 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E5D355C8021531E">3.1-10 ChangeQScoef</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7B47C76B791F69E3">3.1-11 DisplayLPQS</a></span>
 </div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X85861B017AEEC50B">3.2 <span class="Heading">Example</span></a>
+</span>
+</div>
 </div>
 
 <h3>3 <span class="Heading">Usage</span></h3>
@@ -45,7 +48,7 @@
 
 <h4>3.1 <span class="Heading">Available functions</span></h4>
 
-<p>In this section we shall look at the functions provided by qsopt_ex-interface. <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span> allows GAP to communicate with external LP solver process via a stream object of category IsInputOutputStream(). This steam serves as a handle via which one can load/solve/modify linear programs. Note that it is possible to maintain several such steams (and hence LPs) at any given time. However, the gap commands to solve/modify these LPs that currently available in this package are blocking functions.</p>
+<p>In this section we shall look at the functions provided by qsopt_ex-interface. <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span> allows GAP to communicate with external LP solver process via a stream object of category IsInputOutputStream(). This stream serves as a handle via which one can load/solve/modify linear programs. Note that it is possible to maintain several such steams (and hence LPs) at any given time. However, the gap commands to solve/modify these LPs that are currently available in this package are blocking functions.</p>
 
 <p><a id="X7F3A2171848094DB" name="X7F3A2171848094DB"></a></p>
 
@@ -103,7 +106,7 @@
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SolveQSLP</code>( <var class="Arg">s</var>, <var class="Arg">optargs</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Returns: An integer</p>
 
-<p>This function loads an LP by invoking external qsopt-exact LP solver process. It accepts following arguments:</p>
+<p>This function solves an LP by invoking external qsopt-exact LP solver process. It accepts following arguments:</p>
 
 
 <ul>
@@ -229,7 +232,7 @@
 
 </li>
 </ul>
-<p>Returns A an integer which is itself returned by QSopt<span class="Math">\_</span>ex function <span class="Math">\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}</span></p>
+<p>Returns An integer which is itself returned by QSopt<span class="Math">\_</span>ex function <span class="Math">\texttt{mpq}\_\texttt{QSchange}\_\texttt{sense}</span></p>
 
 <p><a id="X7E5D355C8021531E" name="X7E5D355C8021531E"></a></p>
 
@@ -273,6 +276,132 @@
 </li>
 </ul>
 <p>Returns Nothing</p>
+
+<p><a id="X85861B017AEEC50B" name="X85861B017AEEC50B"></a></p>
+
+<h4>3.2 <span class="Heading">Example</span></h4>
+
+<p>Following example explains the standard workflow with qsopt <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span>. We show how to load, solve, display and modify a linear program.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">#  absolute path to the interface executable</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">qs_exec:="/home/aspitrg3-users/jayant/qsopt_interface/dummy";;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Construt a 3-D cube</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">A:=[[1,0,0],[0,1,0],[0,0,1],[-1,0,0],[0,-1,0],[0,0,-1]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b:=[1,1,1,0,0,0];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist:=LoadQSLP([1,1,1],A,b,[],qs_exec);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist[1]; # stdin/stdout handle to the loaded LP</span>
+&lt; input/output stream to dummy &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s:=rlist[1];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayLPQS(s);</span>
+Problem
+ prob
+Maximize
+ obj:   c0 +  c1 +  c2
+Subject To
+ r0:   c0 &lt;= 1
+ r1:   c1 &lt;= 1
+ r2:   c2 &lt;= 1
+ r3:  -  c0 &lt;= 0
+ r4:  -  c1 &lt;= 0
+ r5:  -  c2 &lt;= 0
+Bounds
+ c0 free
+ c1 free
+ c2 free
+End
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SolveQSLP(s,[]); # returns status, 1 for success</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist:=GetQSLPsol_primal(s);; # get primal solution</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist[1]; # return status</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist[2]; # val_rval, 0 means sane</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist[3]; # val, LP solution</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist[4]; # x_rval, 0 means sane</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist[5]; # x, optimum vertex</span>
+[ 1, 1, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist:=GetQSLPsol_dual(s);;  #  get dual solution</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist[1]; # status</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist[2]; # val_rval</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist[3]; # val</span>
+3
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist[4]; # y_rval</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist[5]; # y</span>
+[ 1, 1, 1, 0, 0, 0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoadQSLPobj(s,[-1,-1,-1]); # to minimize, negate the objective</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SolveQSLP(s,[]); # returns status, 1 for success</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist:=GetQSLPsol_primal(s);  #  get primal solution</span>
+[ 1, 0, 0, 0, [ 0, 0, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ChangeQSsense(s,1,"E"); # tighten first inequality (r0)</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayLPQS(s);</span>
+Problem
+prob
+Maximize
+ obj:  -  c0 -  c1 -  c2
+Subject To
+ r0:   c0 = 1
+ r1:   c1 &lt;= 1
+ r2:   c2 &lt;= 1
+ r3:  -  c0 &lt;= 0
+ r4:  -  c1 &lt;= 0
+ r5:  -  c2 &lt;= 0
+Bounds
+ c0 free
+ c1 free
+ c2 free
+End
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ChangeQSrhs(s,1,3/2); # change first row r0's rhs to 3/2</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayLPQS(s);</span>
+Problem
+prob
+Maximize
+obj:  -  c0 -  c1 -  c2
+Subject To
+ r0:   c0 = 3/2
+ r1:   c1 &lt;= 1
+ r2:   c2 &lt;= 1
+ r3:  -  c0 &lt;= 0
+ r4:  -  c1 &lt;= 0
+ r5:  -  c2 &lt;= 0
+Bounds
+ c0 free
+ c1 free
+ c2 free
+End
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SolveQSLP(s,[]); # returns status, 1 for success</span>
+1
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rlist:=GetQSLPsol_primal(s);  #  get primal solution</span>
+[ 1, 0, -3/2, 0, [ 3/2, 0, 0 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DelQSrow(s,1); # delete the first row</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayLPQS(s);</span>
+Problem
+prob
+Maximize
+ obj:  -  c0 -  c1 -  c2
+Subject To
+ r1:   c1 &lt;= 1
+ r2:   c2 &lt;= 1
+ r3:  -  c0 &lt;= 0
+ r4:  -  c1 &lt;= 0
+ r5:  -  c2 &lt;= 0
+Bounds
+ c0 free
+ c1 free
+ c2 free
+End
+</pre></div>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>

@@ -7,8 +7,8 @@
   [30X    [33X[0;6YTo  get  the  newest version of [23X\texttt{qsopt}\_\texttt{ex-interface}[123X,
         download           the           .zip           archive           from
         [7Xhttps://github.com/jayant91089/qsopt_ex-interface[107X  and unpack it using
-        [23X\texttt{unzip  qsopt}\_\texttt{ex-interface-x.zip}[123X in the terminal. Do
-        this   preferably   inside   the   [23Xpkg[123X  subdirectory  of  your  GAP  4
+        '[23X\texttt{unzip  qsopt}\_\texttt{ex-interface-x.zip}[123X'  in the terminal.
+        Do  this  preferably  inside  the  [23Xpkg[123X  subdirectory  of  your  GAP  4
         installation.      It      creates      a      subdirectory     called
         [23X\texttt{qsopt}\_\texttt{ex-interface}[123X.   If   you   do  not  know  the
         whereabouts of the [23Xpkg[123X subdirectory, invoke the following in GAP:[133X
@@ -26,7 +26,7 @@
         folders.  Alternatively,  if  you  have  qsopt-exact  and  GMP already
         installed   on   your   system,  you  can  edit  the  Makefile  inside
         [23X\texttt{qsopt}\_\texttt{ex-interface}[123X  directory so that gcc finds the
-        .so  libraries.  In latter case, you must manually '\texttt{make all}'
+        .so  libraries.  In latter case, you must manually '[23X\texttt{make all}[123X'
         from   the   terminal   inside   [23X\texttt{qsopt}\_\texttt{ex-interface}[123X
         directory.[133X
   
@@ -44,5 +44,8 @@
     [4XLoadPackage( "qsopt_ex-interface");[104X
   [4X[32X[104X
   
-  [33X[0;0Yfrom within GAP.[133X
+  [33X[0;0Yfrom  within  GAP. To expose more [23X\texttt{QSopt exact}[123X functionality to GAP,
+  one  can extend the C part of the interface i.e. [23X\texttt{qsinterface.c}[123X. The
+  relevent  details  of  how the interface works are in [23X\texttt{qsinterface.c}[123X
+  itself.[133X
   

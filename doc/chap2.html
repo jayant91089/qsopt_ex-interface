@@ -30,7 +30,7 @@
 
 
 <ul>
-<li><p>To get the newest version of <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span>, download the .zip archive from <span class="URL"><a href="https://github.com/jayant91089/qsopt_ex-interface">https://github.com/jayant91089/qsopt_ex-interface</a></span> and unpack it using <span class="Math">\texttt{unzip qsopt}\_\texttt{ex-interface-x.zip}</span> in the terminal. Do this preferably inside the <span class="Math">pkg</span> subdirectory of your GAP 4 installation. It creates a subdirectory called <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span>. If you do not know the whereabouts of the <span class="Math">pkg</span> subdirectory, invoke the following in GAP:</p>
+<li><p>To get the newest version of <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span>, download the .zip archive from <span class="URL"><a href="https://github.com/jayant91089/qsopt_ex-interface">https://github.com/jayant91089/qsopt_ex-interface</a></span> and unpack it using '<span class="Math">\texttt{unzip qsopt}\_\texttt{ex-interface-x.zip}</span>' in the terminal. Do this preferably inside the <span class="Math">pkg</span> subdirectory of your GAP 4 installation. It creates a subdirectory called <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span>. If you do not know the whereabouts of the <span class="Math">pkg</span> subdirectory, invoke the following in GAP:</p>
 
 </li>
 </ul>
@@ -43,7 +43,7 @@ GAPInfo.("RootPaths");
 
 
 <ul>
-<li><p>Once unpacked, go to <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span> directory and run the install script <span class="Math">\texttt{unix-install.sh}</span> from the terminal as <span class="Math">\texttt{sh unix-install.sh}</span>. This locally installs qsopt exact and its dependencies (GMP <a href="chapBib.html#biBGranlund12">[Gt15]</a>,libz and libbz2) in lib and include folders. Alternatively, if you have qsopt-exact and GMP already installed on your system, you can edit the Makefile inside <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span> directory so that gcc finds the .so libraries. In latter case, you must manually '\texttt{make all}' from the terminal inside <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span> directory.</p>
+<li><p>Once unpacked, go to <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span> directory and run the install script <span class="Math">\texttt{unix-install.sh}</span> from the terminal as <span class="Math">\texttt{sh unix-install.sh}</span>. This locally installs qsopt exact and its dependencies (GMP <a href="chapBib.html#biBGranlund12">[Gt15]</a>,libz and libbz2) in lib and include folders. Alternatively, if you have qsopt-exact and GMP already installed on your system, you can edit the Makefile inside <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span> directory so that gcc finds the .so libraries. In latter case, you must manually '<span class="Math">\texttt{make all}</span>' from the terminal inside <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span> directory.</p>
 
 </li>
 <li><p>Above step creates an executable \texttt{qsi} inside the <span class="Math">\texttt{qsopt}\_\texttt{ex-interface}</span> directory, which serves as the interface. Note that before using the package in GAP, one must edit either the environment variable <span class="Math">\texttt{LD}\_\texttt{LIBRARY}\_\texttt{PATH}</span> or the so that \texttt{qsi} finds the locally installed libraries.</p>
@@ -58,7 +58,7 @@ GAPInfo.("RootPaths");
 LoadPackage( "qsopt_ex-interface");
 </pre></div>
 
-<p>from within GAP.</p>
+<p>from within GAP. To expose more <span class="Math">\texttt{QSopt exact}</span> functionality to GAP, one can extend the C part of the interface i.e. <span class="Math">\texttt{qsinterface.c}</span>. The relevent details of how the interface works are in <span class="Math">\texttt{qsinterface.c}</span> itself.</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
