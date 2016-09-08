@@ -263,7 +263,7 @@ int getlpsol_primal(mpq_QSprob* p)
         if (rval)
         {
             printf("x_rval:= %d;;", rval);
-            printf("x:= [];;", rval);
+            printf("x:= [];;");
         }
         else
         {
@@ -312,7 +312,7 @@ int getlpsol_dual(mpq_QSprob* p)
         if (rval)
         {
             printf("y_rval:= -1;;");
-            printf("y:= [];;", rval);
+            printf("y:= [];;");
         }
         else
         {

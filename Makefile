@@ -1,5 +1,5 @@
-libpath=$(PWD)/lib
-includepath=$(PWD)/include
+libpath=$(PWD)/../../../lib
+includepath=$(PWD)/../../../include
 
 
 all: qsinterface.c
