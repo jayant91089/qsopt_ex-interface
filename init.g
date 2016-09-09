@@ -8,4 +8,4 @@
 ##  Reading the declaration part of the qsopt_ex-interface package.
 ##
 #############################################################################
-ReadPackage("itap", "gap/qsinterface.gd");
+ReadPackage("qsopt_ex-interface", "gap/qsinterface.gd");

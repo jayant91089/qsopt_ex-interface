@@ -8,8 +8,7 @@
 ##
 ################################################################################
 
-## Utility functions
-
+##
 ##Utility functions
 if not IsBound(DeepCopy_lol) then
 DeepCopy_lol:=function(lol)
@@ -295,7 +294,7 @@ for i in [1..Size(A)] do
   fi;
 od;
 if hasrat=false then
- Display("norat");
+ #Display("norat");
  ostr:=[];
  Append(ostr,[String(1)]);
  Append(ostr,[String(Size(A))]);
@@ -325,7 +324,7 @@ if hasrat=false then
   Append(ostr,[String(x)]);
  od;
 else
- Display("yesrat");
+ #Display("yesrat");
   ostr:="";
   Append(ostr,[String(0)]);
   Append(ostr,[String(Size(A))]);
@@ -425,7 +424,7 @@ for i in [1..Size(A)] do
   fi;
 od;
 if hasrat=false then
- Display("norat");
+ #Display("norat");
  ostr:=[];
  Append(ostr,[String(1)]);
  Append(ostr,[String(Size(A))]);
@@ -455,7 +454,7 @@ if hasrat=false then
   Append(ostr,[String(x)]);
  od;
 else
- Display("yesrat");
+ #Display("yesrat");
   ostr:="";
   Append(ostr,[String(0)]);
   Append(ostr,[String(Size(A))]);
@@ -557,7 +556,7 @@ function(s)
 local ostr,i;
 WriteLine(s,"5 ");
 ostr:=ReadLine(s);;
-Display(ostr);
+#Display(ostr);
 ostr:=Concatenation("local status,val,val_rval,x,x_rval;",ostr,"if status=1 then return [status,val_rval,val,x_rval,x];else return [status]; fi;");
 i := InputTextString( ostr);;
 return ReadAsFunction(i)();
@@ -587,7 +586,7 @@ qs_algo:=0;
 fi;
 WriteLine(s,Concatenation("4 ",String(qs_algo)));
 ostr:=ReadLine(s);
-Display(ostr);
+#Display(ostr);
 ostr:=Concatenation("local status;",ostr,"return status;");
 i := InputTextString( ostr);;
 return ReadAsFunction(i)();
@@ -680,5 +679,3 @@ InstallGlobalFunction(DisplayLPQS,
 function(s)
   WriteLine(s,"11");
 end);
-
-qs_exec:="";
