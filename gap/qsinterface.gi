@@ -679,3 +679,5 @@ InstallGlobalFunction(DisplayLPQS,
 function(s)
   WriteLine(s,"11");
 end);
+
+qs_exec:="/media/jayant/caca58ec-d988-42a0-9e65-4d701ae35d7b/gap4r8/pkg/qsopt_ex-interface/qsi";
