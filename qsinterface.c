@@ -34,6 +34,7 @@ The command codes and their meanings are as follows:
 #include <stdlib.h>
 #include <QSopt_ex.h>
 #include <gmp.h>
+
 long getargs(char*, long**);
 int load_test (mpq_QSprob *p);
 int setqsobj(mpq_QSprob* , long* , long );
@@ -46,7 +47,6 @@ int delrow(mpq_QSprob* , long);
 int changerhs(mpq_QSprob* , long , mpq_t );
 int changesense(mpq_QSprob* , long , int );
 int changecoef(mpq_QSprob* ,long ,long ,mpq_t );
-
 
 int main()
 {
@@ -217,6 +217,8 @@ while(1)
     free(buf_original);
     buf_original=(char*)NULL;
 }
+free(buf);
+free(buf_original);
 return 1;
 }
 
@@ -275,6 +277,7 @@ int getlpsol_primal(mpq_QSprob* p)
             }
             gmp_printf("%Qd];;", x[nb_cols-1]);
         }
+        free(x);
         break;
     default:
         printf ("status:=%d;;", status);
@@ -509,7 +512,7 @@ int setqslp(mpq_QSprob *p, long* args, long len)
         for(j=i;j<i+nb_cmatval;j++)
         {
             mpq_init(cmatval[j-i]);
-               mpq_set_si(cmatval[j-i],args[j],1);
+            mpq_set_si(cmatval[j-i],args[j],1);
         }
         i=j;
         nb_cmatcnt=args[i];
@@ -518,8 +521,10 @@ int setqslp(mpq_QSprob *p, long* args, long len)
         for(j=i;j<i+nb_cmatcnt;j++)
         {
             cmatcnt[j-i]=args[j];
+            //fprintf(stderr, "%d\n", (int)args[j]);
         }
         i=j;
+        //fprintf(stderr, "%d\n", (int)args[i]);
         nb_cmatind=args[i];
         i++;
         cmatind=(int*)malloc(nb_cmatind*sizeof(int));
@@ -546,37 +551,35 @@ int setqslp(mpq_QSprob *p, long* args, long len)
         }
         i=j;
         qs_algo=args[i];
-
-        // print obj:
-        //printf("objective:\n");
-        //for (j=0;j<nb_obj;j++)
-        //gmp_printf("%Qd ", obj[j]);
-        //printf("\n");
-        //// print cmatval:
-        //printf("cmatval:\n");
-        //for (j=0;j<nb_cmatval;j++)
-        //gmp_printf("%Qd  ", cmatval[j]);
-        //printf("\n");
-         //// print cmatcnt:
-        //printf("cmatcnt:\n");
-        //for (j=0;j<nb_cmatcnt;j++)
-        //gmp_printf("%d  ", cmatcnt[j]);
-        //printf("\n");
-         //// print cmatind:
-        //printf("cmatind:\n");
-        //for (j=0;j<nb_cmatind;j++)
-        //gmp_printf("%d  ", cmatind[j]);
-        //printf("\n");
-         //// print sense:
-        //printf("Sense:\n");
-        //for (j=0;j<nb_sense;j++)
-        //printf("%c  ", sense[j]);
-        //printf("\n");
-        //// print rhs:
-        //printf("rhs:\n");
-        //for (j=0;j<nb_rhs;j++)
-        //gmp_printf("%Qd ", rhs[j]);
-        //printf("\n");
+        // fprintf(stderr, "objective:\n");
+        // for (j=0;j<nb_obj;j++)
+        // gmp_fprintf(stderr, "%Qd ", obj[j]);
+        // fprintf(stderr, "\n");
+        // // print cmatval:
+        // fprintf(stderr, "cmatval:\n");
+        // for (j=0;j<nb_cmatval;j++)
+        // gmp_fprintf(stderr,"%Qd  ", cmatval[j]);
+        // fprintf(stderr, "\n");
+        //  // print cmatcnt:
+        // fprintf(stderr, "cmatcnt:\n");
+        // for (j=0;j<nb_cmatcnt;j++)
+        // gmp_fprintf(stderr,"%d  ", cmatcnt[j]);
+        // fprintf(stderr, "\n");
+        //  // print cmatind:
+        // fprintf(stderr, "cmatind:\n");
+        // for (j=0;j<nb_cmatind;j++)
+        // gmp_fprintf(stderr,"%d  ", cmatind[j]);
+        // fprintf(stderr, "\n");
+        //  // print sense:
+        // fprintf(stderr, "Sense:\n");
+        // for (j=0;j<nb_sense;j++)
+        // fprintf(stderr, "%c  ", sense[j]);
+        // fprintf(stderr, "\n");
+        // // print rhs:
+        // fprintf(stderr, "rhs:\n");
+        // for (j=0;j<nb_rhs;j++)
+        // gmp_fprintf(stderr,"%Qd ", rhs[j]);
+        // fprintf(stderr, "\n");
     }
     else // rationals
     {
@@ -742,6 +745,28 @@ int setqslp(mpq_QSprob *p, long* args, long len)
     }
     else
     printf("status:=[1];;");
+    //free everything
+    for(j=0;j<nb_rows;j++)
+    {
+        free(rownames[j]);
+    }
+    for(j=0;j<nb_cols;j++)
+    {
+        free(colnames[j]);
+    }
+    free(cmatcnt);
+    free(cmatbeg);
+    free(cmatind);
+    free(cmatval);
+    free(obj);
+    free(rhs);
+    free(sense);
+    free(lower);
+    free(upper);
+
+    free(colnames);
+    free(rownames);
+
     return 1;
 }
 

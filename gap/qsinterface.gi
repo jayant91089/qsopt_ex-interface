@@ -10,6 +10,7 @@
 
 ##
 ##Utility functions
+qs_exec:="/home/julius/catpit/gap-valgrind/pkg/qsopt_ex-interface/qsi";
 if not IsBound(DeepCopy_lol) then
 DeepCopy_lol:=function(lol)
   local olol,l;
@@ -574,6 +575,7 @@ i := InputTextString( ostr);;
 return ReadAsFunction(i)();
 end);
 
+
 InstallGlobalFunction(SolveQSLP,
 function(s,optargs)
 # solve the already loaded Qsopt LP on stream s
@@ -607,9 +609,13 @@ function(obj,A,b,linrows,qs_exec)
     ostr := qsoptformatstr2( obj, A, b, linrows, [] );;
     nb_ostr := Size( qsoptformatstr( obj, A, b, linrows, [] ) );;
     ostr := Concatenation( "1 ", String( nb_ostr ), " ", ostr );;
+    Print(qs_exec);
     s := InputOutputLocalProcess( DirectoryCurrent(  ), qs_exec, [  ] );
     WriteLine( s, ostr );
     istr:=ReadLine(s);
+    Print("\n");
+    Print(ostr);
+    Print("\n");
     istr:=Concatenation("local status;",istr,"return status;");
     i := InputTextString( istr);;
     return [s,ReadAsFunction(i)()];
@@ -679,5 +685,3 @@ InstallGlobalFunction(DisplayLPQS,
 function(s)
   WriteLine(s,"11");
 end);
-
-qs_exec:="/media/jayant/caca58ec-d988-42a0-9e65-4d701ae35d7b/gap4r8/pkg/qsopt_ex-interface/qsi";
