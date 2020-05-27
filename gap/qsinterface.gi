@@ -10,7 +10,7 @@
 
 ##
 ##Utility functions
-qs_exec:="~/catpit/gap4r8/pkg/qsopt_ex-interface/qsi";
+#qs_exec:="~/catpit/gap4r8/pkg/qsopt_ex-interface/qsi";
 
 if not IsBound(DeepCopy_lol) then
 DeepCopy_lol:=function(lol)
