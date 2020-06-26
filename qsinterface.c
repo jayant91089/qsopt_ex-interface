@@ -565,7 +565,6 @@ int setqslp(mpq_QSprob *p, long* args, long len)
         cmatcnt = getsliceofarr(args, offset, nb_cmatcnt);
         nb_cmatind= getnextcnt(args, nb_cmatcnt, &offset);
         cmatind = getsliceofarr(args, offset, nb_cmatind);
-        offset++;
         nb_sense= getnextcnt(args, nb_cmatind, &offset);
         sense=(char*)malloc(nb_sense*sizeof(char));
         for(int j=offset;j<offset+nb_sense;j++)
@@ -588,7 +587,6 @@ int setqslp(mpq_QSprob *p, long* args, long len)
         cmatcnt = getsliceofarr(args, offset, nb_cmatcnt);
         nb_cmatind= getnextcnt(args, nb_cmatcnt, &offset);
         cmatind = getsliceofarr(args, offset, nb_cmatind);
-        offset++;
         nb_sense= getnextcnt(args, nb_cmatind, &offset);
         sense=(char*)malloc(nb_sense*sizeof(char));
         for(int j=offset;j<offset+nb_sense;j++)
