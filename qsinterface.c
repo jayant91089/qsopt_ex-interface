@@ -69,19 +69,19 @@ while(1)
         buf=buf_original;
         //fprintf(stderr,"buffer addresses = %p",buf_original);
         sscanf(buf,"%d",&cmdcode);
-        //printf("read line %s, cmdcode=%d ",buf,cmdcode);
+        //fprintf(stderr,"read line %s, cmdcode=%d ",buf,cmdcode);
         if(cmdcode==1) // load LP
         {
             i=0;
             buf=buf+2;
             sscanf(buf,"%ld",&nb_args);
-            //printf("nargs = %ld",nb_args);
+            //fprintf(stderr,"nargs = %ld",nb_args);
             args=(long*)malloc(nb_args*sizeof(long));
             for(j=0;j<nb_args;j++)
             {
                 i=nextnum(buf,i);
                 sscanf(buf+i,"%ld",args+j);
-                //printf("j= %d ,num = %ld||",j,args[j]);
+                //fprintf(stderr,"j= %d ,num = %ld||",j,args[j]);
             }
             //printf("loading problem");
             setqslp(&p,args,nb_args);
@@ -108,6 +108,7 @@ while(1)
             }
             setqsobj(&p,args, nb_args);
             free(args);
+	    fflush(stdout);
         }
         else if(cmdcode==4) // solve LP
         {
@@ -233,7 +234,8 @@ int solveqslp(mpq_QSprob *p,int qs_algo)
     rval = QSexact_solver (*p, NULL, NULL, NULL, qs_algo, &status);
     rval = mpq_QSget_status (*p, &status);
     // compose format string to print to stdout, to be picked up by GAP
-    printf("status:=%d;;",status);
+    //fprintf(stderr,"status after = %d ",status);
+    printf("status:=%d;;\n",status);
     return 1;
 }
 
@@ -266,7 +268,7 @@ int getlpsol_primal(mpq_QSprob* p)
         if (rval)
         {
             printf("x_rval:= %d;;", rval);
-            printf("x:= [];;");
+            printf("x:= [];;\n");
         }
         else
         {
@@ -276,12 +278,12 @@ int getlpsol_primal(mpq_QSprob* p)
             {
                 gmp_printf("%Qd,", x[i]);
             }
-            gmp_printf("%Qd];;", x[nb_cols-1]);
+            gmp_printf("%Qd];;\n", x[nb_cols-1]);
         }
         free(x);
         break;
     default:
-        printf ("status:=%d;;", status);
+        printf ("status:=%d;;\n", status);
         break;
     }
     return 1;
@@ -326,11 +328,11 @@ int getlpsol_dual(mpq_QSprob* p)
             {
                 gmp_printf("%Qd,", y[i]);
             }
-            gmp_printf("%Qd];;", y[nb_rows-1]);
+            gmp_printf("%Qd];;\n", y[nb_rows-1]);
         }
         break;
     default:
-        printf ("status:=%d;;", status);
+        printf ("status:=%d;;\n", status);
         break;
     }
     return 1;
@@ -377,13 +379,13 @@ int setqsobj(mpq_QSprob *p, long* args, long len)
     free(obj);
     if(rval==0)
     {
-        printf("rval_obj:=1;;");
+        printf("rval_obj:=1;;\n");
         p[0]->qstatus=6;
         return 1;
     }
     else
     {
-        printf("rval_obj:=-1;;");
+        printf("rval_obj:=-1;;\n");
         return -1;
     }
 }
@@ -423,7 +425,7 @@ int delrow(mpq_QSprob* p, long row)
     //mpq_QSwrite_prob_file(*p,stdout,"LP");
     rval=mpq_QSdelete_row(*p,row);
     //mpq_QSwrite_prob_file(*p,stdout,"LP");
-    printf("delrow_rval:=%d;;",rval);
+    printf("delrow_rval:=%d;;\n",rval);
     p[0]->qstatus=6;
     return 1;
 }
@@ -434,7 +436,7 @@ int changerhs(mpq_QSprob* p, long row, mpq_t coef)
     int rval;
     //mpq_QSwrite_prob_file(*p,stdout,"LP");
     rval=mpq_QSchange_rhscoef(*p,row,coef);
-    printf("rhs_rval:=%d;;",rval);
+    printf("rhs_rval:=%d;;\n",rval);
     p[0]->qstatus=6;
     //mpq_QSwrite_prob_file(*p,stdout,"LP");
     return 1;
@@ -447,7 +449,7 @@ int changesense(mpq_QSprob* p, long row, int sense)
     //mpq_QSwrite_prob_file(*p,stderr,"LP");
 
     rval=mpq_QSchange_sense(*p,row,sense);
-    printf("sense_rval:=%d;;",rval);
+    printf("sense_rval:=%d;;\n",rval);
     p[0]->qstatus=6;
     //mpq_QSwrite_prob_file(*p,stderr,"LP");
     return 1;
@@ -459,7 +461,7 @@ int changecoef(mpq_QSprob* p,long row,long col,mpq_t coef)
     int rval;
     //mpq_QSwrite_prob_file(*p,stderr,"LP");
     rval=mpq_QSchange_coef(*p,row,col,coef);
-    printf("coef_rval:=%d;;",rval);
+    printf("coef_rval:=%d;;\n",rval);
     p[0]->qstatus=6;
     //mpq_QSwrite_prob_file(*p,stderr,"LP");
     return 1;
@@ -565,11 +567,14 @@ int setqslp(mpq_QSprob *p, long* args, long len)
         cmatcnt = getsliceofarr(args, offset, nb_cmatcnt);
         nb_cmatind= getnextcnt(args, nb_cmatcnt, &offset);
         cmatind = getsliceofarr(args, offset, nb_cmatind);
+	// julius error was offset++ below... wtf
         nb_sense= getnextcnt(args, nb_cmatind, &offset);
         sense=(char*)malloc(nb_sense*sizeof(char));
+	//fprintf(stderr,"%d",nb_sense);
         for(int j=offset;j<offset+nb_sense;j++)
         {
             sense[j-offset]=(args[j]==1)?'E':'L';
+	    //fprintf(stderr,"%c\n",sense[j-offset]);
         }
         nb_rhs= getnextcnt(args, nb_sense, &offset);
         rhs = inttompq(args, offset, nb_rhs);
@@ -587,6 +592,7 @@ int setqslp(mpq_QSprob *p, long* args, long len)
         cmatcnt = getsliceofarr(args, offset, nb_cmatcnt);
         nb_cmatind= getnextcnt(args, nb_cmatcnt, &offset);
         cmatind = getsliceofarr(args, offset, nb_cmatind);
+        // julius -- this should not have been here, eh?  offset++;
         nb_sense= getnextcnt(args, nb_cmatind, &offset);
         sense=(char*)malloc(nb_sense*sizeof(char));
         for(int j=offset;j<offset+nb_sense;j++)
@@ -621,10 +627,10 @@ int setqslp(mpq_QSprob *p, long* args, long len)
     *p=mpq_QSload_prob ("prob", nb_cols,nb_rows, cmatcnt, cmatbeg, cmatind, cmatval,
                     QS_MAX, obj, rhs, sense, lower, upper, (const char**)colnames,(const char**)rownames);
     if (*p == (mpq_QSprob) NULL) {
-        printf("status:=[-1];;");
+        printf("status:=[-1];;\n");
     }
     else
-    printf("status:=[1];;");
+    printf("status:=[1];;\n");
 
     //free everything
     for(j=0;j<nb_rows;j++)
