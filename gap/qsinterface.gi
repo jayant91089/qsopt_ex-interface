@@ -10,7 +10,7 @@
 
 ##
 ##Utility functions
-#qs_exec:="~/catpit/gap4r8/pkg/qsopt_ex-interface/qsi";
+qs_exec:="/home/aspitrg3-users/yirui/catpitnew/gap4r8/pkg/qsopt_ex-interface/qsi";
 
 if not IsBound(DeepCopy_lol) then
 DeepCopy_lol:=function(lol)
@@ -558,6 +558,9 @@ function(s)
 local ostr,i;
 WriteLine(s,"5 ");
 ostr:=ReadLine(s);;
+while ostr[Length(ostr)]<>'\n' do
+      ostr:=Concatenation(ostr,ReadLine(s));
+od;
 #Display(ostr);
 ostr:=Concatenation("local status,val,val_rval,x,x_rval;",ostr,"if status=1 then return [status,val_rval,val,x_rval,x];else return [status]; fi;");
 i := InputTextString( ostr);;
@@ -571,6 +574,9 @@ function(s)
 local ostr,i;
 WriteLine(s,"6 ");
 ostr:=ReadLine(s);;
+while ostr[Length(ostr)]<>'\n' do
+      ostr:=Concatenation(ostr,ReadLine(s));
+od;
 ostr:=Concatenation("local status,val,val_rval,y,y_rval;",ostr,"if status=1 then return [status,val_rval,val,y_rval,y]; else return [status]; fi;");
 i := InputTextString( ostr);;
 return ReadAsFunction(i)();
@@ -588,6 +594,9 @@ qs_algo:=0;
 fi;
 WriteLine(s,Concatenation("4 ",String(qs_algo)));
 ostr:=ReadLine(s);
+while ostr[Length(ostr)]<>'\n' do
+      ostr:=Concatenation(ostr,ReadLine(s));
+od;
 #Display(ostr);
 ostr:=Concatenation("local status;",ostr,"return status;");
 i := InputTextString( ostr);;
@@ -609,9 +618,12 @@ function(obj,A,b,linrows,qs_exec)
     ostr := qsoptformatstr2( obj, A, b, linrows, [] );;
     nb_ostr := Size( qsoptformatstr( obj, A, b, linrows, [] ) );;
     ostr := Concatenation( "1 ", String( nb_ostr ), " ", ostr );;
-    s := InputOutputLocalProcess( DirectoryCurrent(  ), qs_exec, ["2> error.log"] );
+    s := InputOutputLocalProcess( DirectoryCurrent(  ), qs_exec, ["2>error.log" ] );
     WriteLine( s, ostr );
     istr:=ReadLine(s);
+    while istr[Length(istr)]<>'\n' do
+    	  istr:=Concatentation(istr,ReadLine(s));
+    od;
     istr:=Concatenation("local status;",istr,"return status;");
     i := InputTextString( istr);;
     return [s,ReadAsFunction(i)()];
@@ -629,6 +641,9 @@ function(s,row)
 local istr,i;
 WriteLine(s,Concatenation("7 ",String(row-1)));
 istr:=ReadLine(s);
+while istr[Length(istr)]<>'\n' do
+      istr:=Concantenation(istr,ReadLine(s));
+od;
 istr:=Concatenation("local delrow_rval;",istr,"return delrow_rval;");
 i := InputTextString( istr);;
 return ReadAsFunction(i)();;
@@ -643,6 +658,9 @@ else
   WriteLine(s,Concatenation("8 3 ",String(row-1)," ",String(NumeratorRat(coef))," ",String(DenominatorRat(coef))));
 fi;
 istr:=ReadLine(s);
+while istr[Length(istr)]<>'\n' do
+      istr:=Concantenation(istr,ReadLine(s));
+od;
 istr:=Concatenation("local rhs_rval;",istr,"return rhs_rval;");
 i := InputTextString( istr);;
 return ReadAsFunction(i)();;
@@ -658,6 +676,9 @@ else
   WriteLine(s,Concatenation("9 2 ",String(row-1)," ",String(69)));
 fi;
 istr:=ReadLine(s);
+while istr[Length(istr)]<>'\n' do
+      istr:=Concantenation(istr,ReadLine(s));
+od;
 istr:=Concatenation("local sense_rval;",istr,"return sense_rval;");
 i := InputTextString( istr);;
 return ReadAsFunction(i)();;
@@ -672,6 +693,9 @@ else
   WriteLine(s,Concatenation("10 4 ",String(row-1)," ",String(col-1)," ",String(NumeratorRat(coef))," ",String(DenominatorRat(coef))));
 fi;
 istr:=ReadLine(s);
+while istr[Length(istr)]<>'\n' do
+      istr:=Concatenation(istr,ReadLine(s));
+od;
 istr:=Concatenation("local coef_rval;",istr,"return coef_rval;");
 i := InputTextString( istr);;
 return ReadAsFunction(i)();;
